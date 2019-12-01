@@ -1,0 +1,64 @@
+{
+  "configVersion": 1,
+  "timestamp": 1575196570721,
+  "index": "https://edyerastov.github.io/wordwatch-ang7/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "urls": [
+        "https://edyerastov.github.io/wordwatch-ang7/favicon.ico",
+        "https://edyerastov.github.io/wordwatch-ang7/index.html",
+        "https://edyerastov.github.io/wordwatch-ang7/main.6bcac2bcf91c1cce69ae.js",
+        "https://edyerastov.github.io/wordwatch-ang7/polyfills.4842ba8ea27d140aaff8.js",
+        "https://edyerastov.github.io/wordwatch-ang7/runtime.26209474bfa8dc87a77c.js",
+        "https://edyerastov.github.io/wordwatch-ang7/scripts.f4a25003ff8f702f2274.js",
+        "https://edyerastov.github.io/wordwatch-ang7/styles.86762d81568c549905f2.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "urls": [
+        "https://edyerastov.github.io/wordwatch-ang7/assets/ngx-rocket-logo.png",
+        "https://edyerastov.github.io/wordwatch-ang7/assets/spinner.gif",
+        "https://edyerastov.github.io/wordwatch-ang7/assets/vocalIconSmall.png"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "https://edyerastov.github.io/wordwatch-ang7/assets/ngx-rocket-logo.png": "0ac53fd27406fe5a36e68285315fb0012e54058e",
+    "https://edyerastov.github.io/wordwatch-ang7/assets/spinner.gif": "dcabdd743fd3e9d7bd5647abeb86e66a3e6f9597",
+    "https://edyerastov.github.io/wordwatch-ang7/assets/vocalIconSmall.png": "5e742b244ce2a6a56030c0e3f06f95e1177b6231",
+    "https://edyerastov.github.io/wordwatch-ang7/favicon.ico": "b65083d46bbf63692d5d2cdd69622e6d7ecae317",
+    "https://edyerastov.github.io/wordwatch-ang7/index.html": "5d97c6ff79d3493fa7208ea05b042aaa25e79147",
+    "https://edyerastov.github.io/wordwatch-ang7/main.6bcac2bcf91c1cce69ae.js": "0737f9ecf3057171addc7ce89e6a213323f1c78b",
+    "https://edyerastov.github.io/wordwatch-ang7/polyfills.4842ba8ea27d140aaff8.js": "0e209fc6c95c94851a2e04e5bc3cc46f3c75c594",
+    "https://edyerastov.github.io/wordwatch-ang7/runtime.26209474bfa8dc87a77c.js": "b62956c2192bfe5516d6374e753773901ed50ec5",
+    "https://edyerastov.github.io/wordwatch-ang7/scripts.f4a25003ff8f702f2274.js": "01ec123f9cc799797665c9f5f0fcf51c7b3d51f6",
+    "https://edyerastov.github.io/wordwatch-ang7/styles.86762d81568c549905f2.css": "7a23301423a29a1bca186bcb013e3ea0f5896b36"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ]
+}
