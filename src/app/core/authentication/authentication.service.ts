@@ -26,13 +26,15 @@ export class AuthenticationService {
   login(context: LoginContext): Observable<LoginContext> {
     const httpOptions = {
       headers: new HttpHeaders({ content: 'application/json', 'content-type': 'application/json;charset=UTF-8' }),
-      withCredentials: true
+      withCredentials: true,
+      responseType: 'text'
     };
     const data = {
       username: context.username,
       token: '123456'
     };
     this.credentialsService.setCredentials(data, context.remember);
+    // @ts-ignore
     return this.httpClient.post<LoginContext>(`/authentication/login/credentials`, context, httpOptions);
   }
 
