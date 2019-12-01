@@ -1,0 +1,157 @@
+<app-header></app-header>
+<div id="wrapper" [ngClass]="{ active: toggle }">
+  <div id="sidebar-wrapper">
+    <!-- Sidebar -->
+    <ul id="sidebar_menu" class="sidebar-nav">
+      <li class="sidebar-brand">
+        <a id="menu-toggle" [routerLink]="" (click)="toggleClass()"
+          ><span id="main_icon" class="fa fa-align-justify"></span
+        ></a>
+      </li>
+    </ul>
+    <ul class="sidebar-nav" id="sidebar">
+      <li id="interaction" class="collapse show">
+        <a [routerLink]="ifActive ? '/home' : null" (click)="onConfirmation('/home')"
+          >Interactions <span class="sub_icon fa fa-phone"></span
+        ></a>
+      </li>
+      <li id="sms" class="collapse show">
+        <a [routerLink]="ifActive ? '/sms' : null" (click)="onConfirmation('/sms')"
+          >SMS <span class="sub_icon fa fa-sms"></span
+        ></a>
+      </li>
+      <li id="insight" class="collapse show">
+        <a [routerLink]="ifActive ? '/insight' : null" (click)="onConfirmation('/insight')"
+          >Insight <span class="sub_icon fas fa-chart-line"></span
+        ></a>
+      </li>
+      <li id="complianceExport" class="collapse show">
+        <a [routerLink]="ifActive ? '/complianceExport' : null" (click)="onConfirmation('/complianceExport')"
+          >Compliance Export <span class="sub_icon fa fa-upload"></span
+        ></a>
+      </li>
+      <li id="complianceHold" class="collapse show">
+        <a [routerLink]="ifActive ? '/complianceHold' : null" (click)="onConfirmation('/complianceHold')"
+          >Compliance Hold <span class="sub_icon fa fa-lock"></span
+        ></a>
+      </li>
+      <li id="complianceReplay" class="collapse show">
+        <a [routerLink]="ifActive ? '/complianceReplay' : null" (click)="onConfirmation('/complianceReplay')"
+          >Compliance Replay <span class="sub_icon fa fa-redo-alt"></span
+        ></a>
+      </li>
+      <li id="auditTrail" class="collapse show">
+        <a [routerLink]="ifActive ? '/auditTrail' : null" (click)="onConfirmation('/auditTrail')"
+          >Audit Trail <span class="sub_icon fa fa-fingerprint"></span
+        ></a>
+      </li>
+      <li id="systemStatus" class="collapse show">
+        <a [routerLink]="ifActive ? '/systemStatus' : null" (click)="onConfirmation('/systemStatus')"
+          >System Status <span class="sub_icon fa fa-check"></span
+        ></a>
+      </li>
+      <li
+        id="administrationHeader"
+        class="collapse show"
+        data-toggle="collapse"
+        data-target="#administration,#interaction,#sms,#insight,#qualityMonitoring,#complianceExport,#complianceHold,#complianceReplay,#auditLog,#auditTrail,#systemStatus,#administrationHeader,#back"
+      >
+        <a>Administration<span class="sub_icon fas fa-tools"></span></a>
+      </li>
+      <li
+        id="back"
+        class="collapse"
+        data-toggle="collapse"
+        data-target="#administration,#interaction,#sms,#insight,#qualityMonitoring,#complianceExport,#complianceHold,#complianceReplay,#auditLog,#auditTrail,#systemStatus,#administrationHeader,#back"
+      >
+        <a><b>BACK</b> <span class="sub_icon fa fa-arrow-left dark"></span></a>
+      </li>
+      <ul class="sub-menu collapse" id="administration">
+        <li>
+          <a [routerLink]="ifActive ? '/users' : null" (click)="onConfirmation('/users')"
+            >Users <span class="sub_icon fa fa-user"></span
+          ></a>
+        </li>
+        <li>
+          <a [routerLink]="ifActive ? '/groups' : null" (click)="onConfirmation('/groups')"
+            >Groups <span class="sub_icon fa fa-users"></span
+          ></a>
+        </li>
+        <li>
+          <a [routerLink]="ifActive ? '/devices' : null" (click)="onConfirmation('/devices')"
+            >Devices <span class="sub_icon fa fa-mobile-alt"></span
+          ></a>
+        </li>
+        <li>
+          <a [routerLink]="ifActive ? '/roles' : null" (click)="onConfirmation('/roles')"
+            >Roles <span class="sub_icon fa fa-check-square"></span
+          ></a>
+        </li>
+        <li>
+          <a [routerLink]="ifActive ? '/locations' : null" (click)="onConfirmation('/locations')"
+            >Storage Locations <span class="sub_icon fa fa-hdd"></span
+          ></a>
+        </li>
+        <li>
+          <a [routerLink]="ifActive ? '/storage' : null" (click)="onConfirmation('/storage')"
+            >Storage Rules <span class="sub_icon fa fa-list"></span
+          ></a>
+        </li>
+        <li>
+          <a [routerLink]="ifActive ? '/retention' : null" (click)="onConfirmation('/retention')"
+            >Retention Rules<span class="sub_icon fa fa-trash-alt"></span
+          ></a>
+        </li>
+        <li>
+          <a [routerLink]="ifActive ? '/additionalFields' : null" (click)="onConfirmation('/additionalFields')"
+            >Additional Fields <span class="sub_icon fa fa-list-alt"></span
+          ></a>
+        </li>
+        <li>
+          <a [routerLink]="ifActive ? '/authTokens' : null" (click)="onConfirmation('/authTokens')"
+            >Authority Tokens <span class="sub_icon fa fa-sign-in-alt"></span
+          ></a>
+        </li>
+        <li>
+          <a [routerLink]="ifActive ? '/complianceGroups' : null" (click)="onConfirmation('/complianceGroups')"
+            >Compliance Groups <span class="sub_icon fa fa-link"></span
+          ></a>
+        </li>
+        <li>
+          <a [routerLink]="ifActive ? '/complianceLocations' : null" (click)="onConfirmation('/complianceLocations')"
+            >Compliance Locations <span class="sub_icon fa fa-inbox"></span
+          ></a>
+        </li>
+        <li>
+          <a [routerLink]="ifActive ? '/licensing' : null" (click)="onConfirmation('/licensing')"
+            >Licensing <span class="sub_icon fa fa-user-lock"></span
+          ></a>
+        </li>
+      </ul>
+    </ul>
+  </div>
+  <div id="page-content-wrapper">
+    <!--main content-->
+    <router-outlet></router-outlet>
+    <!-- footer -->
+    <div class="container2 footer">
+      <div class="row">
+        <div class="col-md-4">
+          <span class="fa fa-copyright"></span>
+          <a href="http://www.businesssystemsuk.co.uk/" target="_blank" translate>BSL_BRAND</a>
+        </div>
+        <div class="col-md-4">
+          <p class="text-center">
+            <span translate-values="{version: version}" translate>{{ 'VERSION' }}</span
+            ><span ng-if="customerName" translate-values="{customerName: customerName}" translate>{{
+              'LICENSE_SUMMARY'
+            }}</span>
+          </p>
+        </div>
+        <div class="col-md-4">
+          <a class="float-right" ui-sref="license" translate>SOFTWARE_LICENSE_TERMS</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

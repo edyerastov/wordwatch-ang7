@@ -1,0 +1,30 @@
+<div [formGroup]="group">
+  <ng-select
+    [items]="deviceListBuffer"
+    [virtualScroll]="true"
+    [hideSelected]="true"
+    placeholder="Devices"
+    bindLabel="name"
+    [searchable]="false"
+    [loading]="loading"
+    (focus)="onDeviceSelect($event)"
+    (change)="onDeviceSelect($event)"
+    (clear)="onDeviceClear($event)"
+    (scrollToEnd)="onScrollToEnd()"
+    [formControlName]="'devices'"
+  >
+    <ng-template ng-option-tmp let-item="item">
+      {{ item.name }} <br />
+      <small class="d-block">{{ item.userFullName }}</small>
+    </ng-template>
+    <ng-template *ngIf="devices !== null" ng-header-tmp>
+      <input
+        class="search-input"
+        type="text"
+        [formControlName]="'deviceSearch'"
+        [(ngModel)]="searchStr"
+        (ngModelChange)="onInputSearch.next($event)"
+      />
+    </ng-template>
+  </ng-select>
+</div>

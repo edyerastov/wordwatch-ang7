@@ -1,0 +1,29 @@
+<div [formGroup]="group">
+  <ng-select
+    [items]="groupListBuffer"
+    [virtualScroll]="true"
+    placeholder="Groups"
+    bindLabel="name"
+    [searchable]="false"
+    [loading]="loading"
+    (focus)="onGroupSelect($event)"
+    (change)="onGroupSelect($event)"
+    (clear)="onGroupClear($event)"
+    (scrollToEnd)="onScrollToEnd()"
+    [formControlName]="'groups'"
+  >
+    <ng-template ng-option-tmp let-item="item">
+      {{ item.name }} <br />
+      <small>{{ item.type }}</small>
+    </ng-template>
+    <ng-template *ngIf="groups !== null" ng-header-tmp>
+      <input
+        class="search-input"
+        type="text"
+        [formControlName]="'groupSearch'"
+        [(ngModel)]="searchStr"
+        (ngModelChange)="onInputSearch.next($event)"
+      />
+    </ng-template>
+  </ng-select>
+</div>

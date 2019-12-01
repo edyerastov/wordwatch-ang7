@@ -1,0 +1,44 @@
+<div class="row-details">
+  <h2 translate>ROLE</h2>
+  <div class="form-group">
+    <div class="row align-items-center">
+      <label class="font-weight-bold offset-1 col-1 mb-0 text-right" translate>ROLE</label>
+      <app-role-picker
+        class="col-10"
+        [options]="roleSelect2Options"
+        (onChange)="onRoleChange($event)"
+        (onClear)="onRoleClear($event)"
+        [group]="userRoleForm"
+      ></app-role-picker>
+      <div class="offset-2 col-10 p-0 mt-2" *ngIf="userRoleForm.value.roles !== null">
+        <span class="font-weight-bold">This user can:</span>
+        <ul class="pl-3 mb-0">
+          <li *ngFor="let permission of rolePermissions">{{ permission }}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="offset-md-2 col-sm-10">
+      <button
+        type="submit"
+        class="btn btn-success"
+        [disabled]="userRoleForm.invalid || showCancelConfirmation"
+        translate
+        (click)="onUserUpdate()"
+      >
+        {{ 'SAVE' | translate }}
+      </button>
+      <button class="btn btn-success" (click)="onCancel()" [disabled]="showCancelConfirmation">
+        {{ 'CANCEL' | translate }}
+      </button>
+    </div>
+  </div>
+  <div class="form-group row" [hidden]="!showCancelConfirmation">
+    <label class="col-sm-6 col-form-label" translate>CANCEL_SURE</label>
+    <div class="col-sm-6">
+      <button (click)="back()" class="btn btn-success" translate>YES</button>
+      <button (click)="showCancelConfirmation = false" class="btn btn-default" translate>NO</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,74 @@
+/*
+ * Application global variables.
+ */
+
+// Set Font Awesome font path
+$fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
+
+// ---------------------------------------------------------------------------
+// Bootstrap variables
+//
+// Override Bootstrap variables here to suite your theme.
+// Copy variables you want to customize from node_modules/bootstrap/scss/_variables.scss
+
+//
+// Color system
+//
+
+$white: #fff;
+$gray-100: #f8f9fa;
+$gray-200: #e9ecef;
+$gray-300: #dee2e6;
+$gray-400: #ced4da;
+$gray-500: #adb5bd;
+$gray-600: #868e96;
+$gray-700: #495057;
+$gray-800: #343a40;
+$gray-900: #212529;
+$black: #000;
+
+$blue: #0073dd;
+$indigo: #6610f2;
+$purple: #6f42c1;
+$pink: #e83e8c;
+$red: #dc3545;
+$orange: #fd7e14;
+$yellow: #ffc107;
+$green: #28a745;
+$teal: #20c997;
+$cyan: #17a2b8;
+
+$theme-colors: (
+  primary: #007292,
+  secondary: white,
+  success: #3d5c6e,
+  info: #5bc0de,
+  warning: #ff6600,
+  danger: #eb2000,
+  light: $gray-100,
+  dark: $gray-800
+);
+
+$brand-primary: #007292 !default;
+$brand-success: #3d5c6e !default;
+$brand-info: #5bc0de !default;
+$brand-warning: #ff6600 !default;
+$brand-danger: #eb2000 !default;
+
+$navbar-default-bg: #cee5f3 !default;
+$panel-default-heading-bg: darken($navbar-default-bg, 6.5%) !default;
+$font-size-base: 0.7rem !default;
+
+$state-danger-bg: #f2dede !default;
+$table-bg-accent: #f9f9f9 !default;
+$btn-info-color: #fff !default;
+$btn-info-bg: $brand-info !default;
+$btn-info-border: darken($btn-info-bg, 5%) !default;
+$font-size-small: ceil(($font-size-base * 0.85)) !default; // ~12px
+$gray-base: #000 !default;
+$gray-dark: lighten($gray-base, 20%) !default; // #333
+
+// Use Bootstrap defaults for other variables, imported here so we can access all app variables in one place when used
+// in components.
+@import "~bootstrap/scss/_functions";
+@import "~bootstrap/scss/_variables";

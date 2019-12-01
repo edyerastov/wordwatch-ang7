@@ -1,0 +1,15 @@
+<div class="pagination">
+  <div class="no-element text" *ngIf="!paginationInfo || paginationInfo.totalPages == 0">
+    There are no elements to display
+  </div>
+  <div class="pagination-info" *ngIf="paginationInfo && paginationInfo.totalPages > 0">
+    <button [disabled]="paginationInfo.pageNumber == 0" (click)="onPreviousPageClick()">Previous</button>
+    <p class="text">
+      Page {{ paginationInfo.pageNumber + 1 }} of {{ paginationInfo.totalPages }} (Total Records:
+      {{ paginationInfo.totalResults }})
+    </p>
+    <button [disabled]="paginationInfo.pageNumber == paginationInfo.totalPages - 1" (click)="onNextPageClick()">
+      Next
+    </button>
+  </div>
+</div>

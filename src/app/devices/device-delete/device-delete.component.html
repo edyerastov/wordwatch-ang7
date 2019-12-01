@@ -1,0 +1,16 @@
+<div class="delete-role">
+  <h2 translate>
+    Delete <strong>{{ deviceName }}</strong>
+  </h2>
+  <div class="form-horizontal">
+    <div class="form-group row">
+      <label class="col-sm-6 control-label" translate>ARE_YOU_SURE</label>
+      <div class="col-sm-6">
+        <button (click)="onDeviceDelete()" [disabled]="!deviceId" class="btn btn-danger" translate>
+          DELETE
+        </button>
+        <button class="btn btn-default" (click)="onCancel()" translate>CANCEL</button>
+      </div>
+    </div>
+  </div>
+</div>

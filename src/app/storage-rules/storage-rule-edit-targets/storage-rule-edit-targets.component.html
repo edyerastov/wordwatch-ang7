@@ -1,0 +1,147 @@
+<ngb-tabset>
+  <ngb-tab title="Devices Targets">
+    <ng-template ngbTabContent>
+      <h3 class="text-center mt-3" translate>DEVICES_TARGETS</h3>
+      <div class="row">
+        <label class="col-sm-2 col-form-label" translate>AVAILABLE_DEVICES</label>
+        <div class="col-sm-10">
+          <app-device-picker (onChangeDevices)="onAddDevice($event)" [group]="storageRuleForm"> </app-device-picker>
+        </div>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th translate>DEVICES</th>
+              <th translate>USER</th>
+              <th translate class="text-center">ALLOCATED</th>
+              <th translate class="text-center">REMOVE</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngIf="deviceList.length === 0">
+              <tr>
+                <td colspan="4" class="text-center" translate>THERE_ARE_NO_ELEMENTS</td>
+              </tr>
+            </ng-container>
+            <ng-container *ngFor="let device of deviceList; let i = index">
+              <tr>
+                <td>{{ device.name }}</td>
+                <td>{{ device.userFullName }}</td>
+                <td class="text-center">
+                  <i class="fas fa-check" *ngIf="device.isAllocated"></i>
+                  <i class="fas fa-times" *ngIf="!device.isAllocated"></i>
+                </td>
+                <td class="text-center">
+                  <a [routerLink]="" (click)="deleteDevice(i)"><i class="fas fa-times"></i></a>
+                </td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+      </div>
+    </ng-template>
+  </ngb-tab>
+  <ngb-tab title="Users Targets">
+    <ng-template ngbTabContent>
+      <h3 class="text-center mt-3" translate>USERS_TARGETS</h3>
+      <div class="row">
+        <label class="col-sm-2 col-form-label" translate>AVAILABLE_USERS</label>
+        <div class="col-sm-10">
+          <app-user-picker (onChangeUsers)="onAddUser($event)" [group]="storageRuleForm"> </app-user-picker>
+        </div>
+        <table class="table mt-3 table-hover">
+          <thead>
+            <tr>
+              <th translate>USERNAME</th>
+              <th translate>FULLNAME</th>
+              <th translate>EMAIL</th>
+              <th translate>ROLE</th>
+              <th translate class="text-center">ENABLED</th>
+              <th translate class="text-center">REMOVE</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngIf="userList.length === 0">
+              <tr>
+                <td colspan="6" class="text-center" translate>THERE_ARE_NO_ELEMENTS</td>
+              </tr>
+            </ng-container>
+            <ng-container *ngFor="let user of userList; let i = index">
+              <tr>
+                <td>{{ user.userName }}</td>
+                <td>{{ user.fullName }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.role }}</td>
+                <td class="text-center">
+                  <i class="fas fa-check" *ngIf="user.active"></i>
+                  <i class="fas fa-times" *ngIf="!user.active"></i>
+                </td>
+                <td class="text-center">
+                  <a [routerLink]="" (click)="deleteUser(i)"><i class="fas fa-times"></i></a>
+                </td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+      </div>
+    </ng-template>
+  </ngb-tab>
+  <ngb-tab title="Groups Targets">
+    <ng-template ngbTabContent>
+      <h3 class="text-center mt-3" translate>DEVICES_GROUPS_TARGETS</h3>
+      <div class="row">
+        <label class="col-sm-2 col-form-label" translate>AVAILABLE_GROUPS</label>
+        <div class="col-sm-10">
+          <app-group-picker (onChangeGroups)="onAddGroup($event)" [group]="storageRuleForm"></app-group-picker>
+        </div>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th translate>GROUPS</th>
+              <th translate>GROUP_TYPE</th>
+              <th translate class="text-center">REMOVE</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngIf="groupList.length === 0">
+              <tr>
+                <td colspan="3" class="text-center" translate>THERE_ARE_NO_ELEMENTS</td>
+              </tr>
+            </ng-container>
+            <ng-container *ngFor="let group of groupList; let i = index">
+              <tr>
+                <td>{{ group.name }}</td>
+                <td>{{ group.type }}</td>
+                <td class="text-center">
+                  <a [routerLink]="" (click)="deleteGroup(i)"><i class="fas fa-times"></i></a>
+                </td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+      </div>
+    </ng-template>
+  </ngb-tab>
+</ngb-tabset>
+<div class="form-group row">
+  <div class="offset-md-2 col-sm-10">
+    <button
+      type="submit"
+      class="btn btn-success"
+      translate
+      [disabled]="storageRuleForm.invalid || showCancelConfirmation || !state"
+      (click)="onStorageRuleUpdate()"
+    >
+      SAVE
+    </button>
+    <button class="btn btn-success" (click)="onCancel()" [disabled]="showCancelConfirmation" translate>
+      CANCEL
+    </button>
+  </div>
+</div>
+<div class="form-group row" [hidden]="!showCancelConfirmation">
+  <label class="col-sm-6 col-form-label" translate>CANCEL_SURE</label>
+  <div class="col-sm-6">
+    <button (click)="back()" class="btn btn-success" translate>YES</button>
+    <button (click)="showCancelConfirmation = false" class="btn btn-default" translate>NO</button>
+  </div>
+</div>

@@ -1,0 +1,140 @@
+<div>
+  <div class="card panel-default">
+    <div class="card-header h-70">
+      <div class="row">
+        <div class="col-sm-4">
+          <a class="btn btn-primary" (click)="add()" translate>CREATE_STORAGE_LOCATION</a>
+        </div>
+        <div class="col-sm-4 text-center">
+          <span class="lead" translate>STORAGE_LOCATIONS</span>
+        </div>
+
+        <div class="col-sm-4">
+          <div class="btn-group float-right">
+            <a class="btn btn-light" (click)="downloadCsv()">
+              <span class="fa fa-list-alt"></span> {{ 'CSV' | translate }}
+            </a>
+            <a class="btn btn-light" (click)="clear()"> <span class="fa fa-times"></span>{{ 'RESET' | translate }} </a>
+            <button type="submit" class="btn btn-success" (click)="onSearch()">
+              <span class="fa fa-search"></span>{{ 'SEARCH' | translate }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-body">
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="form-group">
+            <label class="font-weight-bold">Name</label>
+            <div>
+              <app-location-picker
+                (changeLocations)="onLocationsNameSelect($event)"
+                (clearLocations)="onLocationPickerClear()"
+                [group]="locationsListForm"
+              ></app-location-picker>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-2">
+          <div class="form-group">
+            <label class="font-weight-bold">Type</label>
+            <div>
+              <app-location-type-picker
+                [options]="locationsTypesSelectOptions"
+                (locationTypeCange)="onLocationsTypeSelect($event)"
+                (locationTypeCLear)="onLocationPickerClear()"
+                [locationTypes]="locationsListForm"
+              >
+              </app-location-type-picker>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container2">
+      <table class="table table-hover">
+        <thead class="thead-dark">
+          <tr class="table-header">
+            <th [ngStyle]="{ width: 100 / 2 + '%' }" (click)="invertLocationsList()">
+              <div class="d-flex align-items-center w-100">
+                <span>{{ 'NAME' | translate }}</span>
+                <i
+                  class="fas fa-angle-down ml-auto angle"
+                  [ngClass]="{ 'angle-hided': !sort }"
+                  *ngIf="!reverseLocationsListByName"
+                ></i>
+                <i
+                  class="fas fa-angle-up ml-auto angle"
+                  [ngClass]="{ 'angle-hided': !sort }"
+                  *ngIf="reverseLocationsListByName"
+                ></i>
+              </div>
+            </th>
+            <th [ngStyle]="{ width: 100 / 2 + '%' }">
+              <div class="d-flex align-items-center w-100">
+                <span>{{ 'TYPE' | translate }}</span>
+              </div>
+            </th>
+            <th></th>
+          </tr>
+        </thead>
+      </table>
+
+      <div class="table-scroll-container">
+        <table class="table table-hover">
+          <tbody class="stripped">
+            <ng-container *ngFor="let item of locationsList">
+              <tr
+                (click)="onRowSelect(item)"
+                [ngClass]="{
+                  'info highLightBorderRow': locationItemSelected !== null && item?.id === locationItemSelected?.id
+                }"
+              >
+                <td [ngStyle]="{ width: 100 / 2 + '%' }">
+                  {{ locationItemSelected?.name === item.name ? locationItemSelected.name : item.name }}
+                </td>
+                <td [ngStyle]="{ width: 100 / 2 + '%' }">
+                  {{
+                    locationItemSelected?.type === item.type
+                      ? STORAGE_LOCATIONS_TYPES[locationItemSelected.type]
+                      : STORAGE_LOCATIONS_TYPES[item.type]
+                  }}
+                </td>
+              </tr>
+              <tr
+                class="highLightBorder"
+                *ngIf="locationItemSelected !== null && item?.id === locationItemSelected?.id"
+              >
+                <td colspan="2" class="noHoverEffect">
+                  <router-outlet></router-outlet>
+                </td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6">
+          <app-pagination [paginationInfo]="paginationInfo" (onChange)="onPageChange($event)"></app-pagination>
+        </div>
+        <div class="col-sm-6">
+          <app-page-size-picker
+            class="pull-right"
+            [paginationInfo]="paginationInfo"
+            [options]="[5, 10, 25, 50, 75, 100]"
+            (onChange)="onPageSizeSelect($event)"
+          >
+          </app-page-size-picker>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6"></div>
+        <div class="col-6"></div>
+      </div>
+    </div>
+  </div>
+</div>

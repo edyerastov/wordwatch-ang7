@@ -1,0 +1,147 @@
+/*  http://bootsnipp.com/user/snippets/k2abg  */
+$menu-width: 198px;
+$menu-left: 70px;
+$menu-width-small: 30px;
+
+$color-bg: #cee5f3;
+$color-bg-active: darken($color-bg, 6.5%);
+$color-bg-hover: lighten($color-bg, 2.5%);
+$color: lighten(black, 50%);
+$color-active: black;
+$color-hover: darken($color-bg, 13%);
+
+#wrapper {
+  padding-left: 0; // $menu-left;
+  transition: all 0.4s ease 0s;
+}
+
+#sidebar-wrapper {
+  margin-left: -$menu-width;
+  left: $menu-width-small;
+  top: 51px;
+  width: $menu-width;
+  background: $color-bg-hover;
+  position: fixed;
+  transition: all 0.4s ease 0s;
+  height: 100%;
+}
+
+#sidebar {
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 100%;
+  padding-bottom: 94px;
+}
+
+#sidebar::-webkit-scrollbar {
+  display: none;
+  width: 5px;
+}
+#sidebar::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+}
+
+#sidebar::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+}
+
+.sidebar-nav {
+  display: block;
+  float: left;
+  width: $menu-width;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sub-menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+#page-content-wrapper {
+  //new
+  padding-top: 60px; // changes to make top navbar at fixed position
+  padding-left: 40px;
+  margin-left: 0;
+  width: 100%;
+  height: 100%;
+}
+#wrapper.active {
+  padding-left: $menu-width - 30;
+}
+#wrapper.active #sidebar-wrapper {
+  left: $menu-width;
+}
+#page-content-wrapper {
+  //new
+  width: 100%;
+}
+#sidebar_menu li a,
+.sidebar-nav li a {
+  color: $color;
+  display: block;
+  // float: left;
+  text-decoration: none;
+  width: $menu-width;
+  background: $color-bg;
+  border-top: 1px solid darken($color-bg, 5%);
+  border-bottom: 1px solid darken($color-bg, 5%);
+  -webkit-transition: background 0.5s;
+  -moz-transition: background 0.5s;
+  -o-transition: background 0.5s;
+  -ms-transition: background 0.5s;
+  transition: background 0.5s;
+  height: 40px;
+}
+.sidebar-nav li {
+  line-height: 40px;
+  text-indent: 20px;
+}
+.sidebar-nav > .sidebar-brand {
+  line-height: 60px;
+  font-size: 18px;
+}
+
+.sidebar-nav a {
+  text-decoration: none;
+  display: block;
+  color: $color;
+  &:hover {
+    color: $color-hover;
+    background: none;
+  }
+  &.active {
+    color: $color-active;
+    background: $color-bg-active;
+  }
+}
+
+.sidebar-nav ul .sub-menu li ul,
+.sidebar-nav li .sub-menu li ul {
+  margin-left: 0px;
+  list-style-type: none;
+  padding: 0;
+}
+
+#sidebar .sub_icon {
+  float: right;
+  padding-right: 10px;
+  padding-top: 10px;
+}
+
+#sidebar.active .sub_icon {
+  float: right;
+  padding-right: 10px;
+  padding-top: 10px;
+}
+
+#main_icon {
+  color: $color-bg-active;
+  float: right;
+  padding-right: 6px;
+  padding-top: 10px;
+}

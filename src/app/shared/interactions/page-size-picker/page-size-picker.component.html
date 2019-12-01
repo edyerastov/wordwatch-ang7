@@ -1,0 +1,16 @@
+<!-- '<div class="btn-group">' +
+    '<button ng-repeat="option in options" ng-click="newSizeSelected(option)" class="btn btn-xs" ng-class="filter.pageSize==option?\'btn-info\':\'btn-default\'">' +
+        '<span class="badge">{{option}}</span>' +
+    '</button>' +
+'</div>' -->
+
+<div class="page-size-picker btn-group">
+  <button
+    class="btn btn-xs btn-default"
+    [ngClass]="{ 'btn-info': option == paginationInfo?.pageSize }"
+    *ngFor="let option of options"
+    (click)="onOptionSelect(option)"
+  >
+    <span class="badge">{{ option }}</span>
+  </button>
+</div>

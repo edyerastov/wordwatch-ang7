@@ -1,0 +1,77 @@
+<div class="row-details">
+  <div class="row">
+    <h2 class="col-lg-6">Details</h2>
+    <div class="col-lg-6">
+      <div class="form-group">
+        <label class="font-weight-bold">Search</label>
+        <div class="input-group">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Search..."
+            aria-describedby="button-addon"
+            [(ngModel)]="searchStr"
+            (ngModelChange)="onInputSearch.next($event)"
+          />
+          <div class="input-group-append">
+            <button
+              class="btn btn-default"
+              type="button"
+              id="button-addon"
+              (click)="getGroupDetails({ id: this.groupId, query: searchStr })"
+            >
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <table class="table table-hover" *ngIf="groupType === 'User'">
+    <thead>
+      <tr>
+        <th translate>USERNAME</th>
+        <th translate>FULLNAME</th>
+        <th translate>EMAIL</th>
+        <th translate>ROLE</th>
+        <th translate class="text-center">ENABLED</th>
+      </tr>
+    </thead>
+    <tbody *ngIf="groupList?.length !== 0">
+      <ng-container *ngFor="let user of groupList; let i = index">
+        <tr>
+          <td>{{ user.userName }}</td>
+          <td>{{ user.fullName }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.roleName }}</td>
+          <td class="text-center">
+            <i class="fas fa-check" *ngIf="user.active"></i>
+            <i class="fas fa-times" *ngIf="!user.active"></i>
+          </td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+  <table class="table table-hover" *ngIf="groupType === 'Device'">
+    <thead>
+      <tr>
+        <th translate>DEVICES</th>
+        <th translate>USER</th>
+        <th translate class="text-center">ALLOCATED</th>
+      </tr>
+    </thead>
+    <tbody *ngIf="groupList?.length !== 0">
+      <ng-container *ngFor="let device of groupList; let i = index">
+        <tr>
+          <td>{{ device.name }}</td>
+          <td>{{ device.userFullName }}</td>
+          <td class="text-center">
+            <i class="fas fa-check" *ngIf="device.isAllocated"></i>
+            <i class="fas fa-times" *ngIf="!device.isAllocated"></i>
+          </td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+  <span class="text-center no-elements" *ngIf="groupList?.length === 0">There are no elements to display.</span>
+</div>

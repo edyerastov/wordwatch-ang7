@@ -1,0 +1,28 @@
+<div [formGroup]="group">
+  <ng-select
+    [items]="userDevicesListBuffer"
+    [virtualScroll]="true"
+    [hideSelected]="true"
+    placeholder="Devices"
+    [searchable]="false"
+    [loading]="loading"
+    (focus)="onUserSelect($event)"
+    (change)="onUserChange($event)"
+    (clear)="onUserClear($event)"
+    (scrollToEnd)="onScrollToEnd()"
+    [formControlName]="'userDevices'"
+  >
+    <ng-template ng-option-tmp let-item="item">
+      {{ item.name }}
+    </ng-template>
+    <ng-template *ngIf="userDevicesListBuffer !== null" ng-header-tmp>
+      <input
+        class="search-input"
+        type="text"
+        [formControlName]="'userDevicesSearch'"
+        [(ngModel)]="searchStr"
+        (ngModelChange)="onInputSearch.next($event)"
+      />
+    </ng-template>
+  </ng-select>
+</div>

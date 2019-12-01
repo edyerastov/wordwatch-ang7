@@ -1,0 +1,16 @@
+<div [formGroup]="group">
+  <ng-select
+    [items]="data"
+    placeholder="Search Profile"
+    [searchable]="false"
+    (change)="onItemSelect($event)"
+    (focus)="onItemSelect($event)"
+    (clear)="onItemClear($event)"
+    [(ngModel)]="selected"
+    [formControlName]="'profiles'"
+  >
+    <ng-template *ngIf="options?.searchable" ng-search-tmp>
+      <input class="search-input" type="text" [(ngModel)]="searchStr" (ngModelChange)="onInputSearch.next($event)" />
+    </ng-template>
+  </ng-select>
+</div>

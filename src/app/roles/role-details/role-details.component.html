@@ -1,0 +1,157 @@
+<div class="row-details">
+  <h2 translate>DETAILS</h2>
+  <div class="row">
+    <div class="col-md-2">
+      <label class="col-sm-10 col-form-label" translate>SEARCH_PROFILE</label>
+    </div>
+    <div class="col-md-10">
+      <span>{{ roleDetails?.searchProfile?.type }}</span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-2">
+      <p class="col-md-10 col-form-label">
+        <label>{{ 'ROLE' | translate }} ({{ 'PERMISSIONS' | translate }})</label>
+      </p>
+    </div>
+    <div class="col-md-10">
+      <span>{{ roleDetails?.permissions?.join(', ') }}</span>
+    </div>
+  </div>
+  <div
+    class="col-sm-12"
+    *ngIf="roleDetails?.searchProfile?.type === 'WhiteList' || roleDetails?.searchProfile?.type === 'BlackList'"
+  >
+    <div class="row-details">
+      <div class="col-sm-12">
+        <ul class="nav nav-tabs" id="profileTabs" role="tablist">
+          <li class="nav-item">
+            <a
+              class="nav-link active"
+              id="devices-tab"
+              data-toggle="tab"
+              href="#devices"
+              role="tab"
+              aria-controls="devices"
+              aria-selected="true"
+              translate
+              >DEVICES</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              translate
+              id="users-tab"
+              data-toggle="tab"
+              href="#users"
+              role="tab"
+              aria-controls="users"
+              aria-selected="false"
+              >USERS</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              translate
+              id="groups-tab"
+              data-toggle="tab"
+              href="#groups"
+              role="tab"
+              aria-controls="groups"
+              aria-selected="false"
+              >GROUPS</a
+            >
+          </li>
+        </ul>
+        <div class="tab-content" id="profileTabsContent">
+          <div class="tab-pane fade show active" id="devices" role="tabpanel" aria-labelledby="devices-tab">
+            <h3 class="text-center mt-3" translate>DEVICES</h3>
+            <div class="row">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th translate>DEVICES</th>
+                    <th translate>USER</th>
+                    <th translate class="text-center">ALLOCATED</th>
+                  </tr>
+                </thead>
+                <tbody *ngIf="devices?.length !== 0">
+                  <ng-container *ngFor="let device of devices; let i = index">
+                    <tr>
+                      <td>{{ device.name }}</td>
+                      <td>{{ device.userFullName }}</td>
+                      <td class="text-center">
+                        <i class="fas fa-check" *ngIf="device.isAllocated"></i>
+                        <i class="fas fa-times" *ngIf="!device.isAllocated"></i>
+                      </td>
+                    </tr>
+                  </ng-container>
+                </tbody>
+              </table>
+              <span class="text-center no-elements" *ngIf="devices?.length === 0"
+                >There are no elements to display.</span
+              >
+            </div>
+          </div>
+          <div class="tab-pane fade" id="users" role="tabpanel" aria-labelledby="users-tab">
+            <h3 class="text-center mt-3" translate>USERS</h3>
+            <div class="row">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th translate>USERNAME</th>
+                    <th translate>FULLNAME</th>
+                    <th translate>EMAIL</th>
+                    <th translate>ROLE</th>
+                    <th translate class="text-center">ENABLED</th>
+                  </tr>
+                </thead>
+                <tbody *ngIf="users?.length !== 0">
+                  <ng-container *ngFor="let user of users; let i = index">
+                    <tr>
+                      <td>{{ user.userName }}</td>
+                      <td>{{ user.fullName }}</td>
+                      <td>{{ user.email }}</td>
+                      <td>{{ user.roleName }}</td>
+                      <td class="text-center">
+                        <i class="fas fa-check" *ngIf="user.active"></i>
+                        <i class="fas fa-times" *ngIf="!user.active"></i>
+                      </td>
+                    </tr>
+                  </ng-container>
+                </tbody>
+              </table>
+              <span class="text-center no-elements" *ngIf="users?.length === 0">There are no elements to display.</span>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="groups" role="tabpanel" aria-labelledby="groups-tab">
+            <h3 class="text-center mt-3" translate>GROUPS</h3>
+            <div class="row">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th translate>GROUPS</th>
+                    <th translate>GROUP_TYPE</th>
+                  </tr>
+                </thead>
+                <tbody *ngIf="groups?.length !== 0">
+                  <ng-container *ngFor="let group of groups; let i = index">
+                    <tr>
+                      <td>{{ group.name }}</td>
+                      <td>{{ group.type }}</td>
+                    </tr>
+                  </ng-container>
+                </tbody>
+              </table>
+              <span class="text-center no-elements" *ngIf="groups?.length === 0"
+                >There are no elements to display.</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

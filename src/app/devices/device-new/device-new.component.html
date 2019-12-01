@@ -1,0 +1,63 @@
+<div class="card panel-default">
+  <div class="card-header">
+    <div class="row">
+      <div class="col-sm-12 text-center">
+        <span class="lead" translate>CREATE_DEVICE</span>
+      </div>
+    </div>
+  </div>
+  <div class="container2 form">
+    <form novalidate class="form-horizontal css-form" [formGroup]="deviceNewForm">
+      <div class="form-group row align-items-center mr-0 ml-0">
+        <label class="font-weight-bold col-2 mb-0 text-right" translate>DEVICE_NAME</label>
+        <input
+          type="text"
+          class="form-control col-10"
+          id="deviceName"
+          name="deviceName"
+          placeholder="{{ 'DEVICE_NAME' | translate }}"
+          formControlName="deviceName"
+        />
+      </div>
+      <div class="form-group row align-items-center mr-0 ml-0">
+        <label class="font-weight-bold col-2 mb-0 text-right" translate>USER</label>
+        <app-user-picker
+          class="col-10 p-0"
+          [options]="roleSelect2Options"
+          (onChangeUsers)="onUserChange($event)"
+          (onClearUsers)="onUserClear($event)"
+          [group]="deviceNewForm"
+        ></app-user-picker>
+      </div>
+      <div class="form-group row">
+        <div class="offset-md-2 col-sm-10">
+          <button
+            type="submit"
+            class="btn btn-success"
+            [disabled]="deviceNewForm.invalid"
+            translate
+            (click)="onDeviceCreate()"
+          >
+            {{ 'SAVE' | translate }}
+          </button>
+          <button class="btn btn-success" (click)="onCancel()" [disabled]="showCancelConfirmation">
+            {{ 'CANCEL' | translate }}
+          </button>
+        </div>
+      </div>
+      <div class="form-group row" [hidden]="!showCancelConfirmation">
+        <label class="col-sm-6 col-form-label" translate>CANCEL_SURE</label>
+        <div class="col-sm-6">
+          <button (click)="confirm(); shellService.changeState(true)" class="btn btn-success" translate>YES</button>
+          <button
+            (click)="showCancelConfirmation = false; shellService.changeState(true)"
+            class="btn btn-default"
+            translate
+          >
+            NO
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

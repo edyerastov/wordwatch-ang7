@@ -1,0 +1,15 @@
+<div [formGroup]="locationTypes">
+  <ng-select
+    [items]="locationsTypes"
+    placeholder="Any"
+    [searchable]="false"
+    (change)="onItemSelect($event)"
+    (clear)="onItemClear()"
+    [(ngModel)]="selected"
+    [formControlName]="'locationType'"
+  >
+    <ng-template *ngIf="options?.searchable" ng-search-tmp>
+      <input class="search-input" type="text" [(ngModel)]="searchStr" (ngModelChange)="onInputSearch.next($event)" />
+    </ng-template>
+  </ng-select>
+</div>

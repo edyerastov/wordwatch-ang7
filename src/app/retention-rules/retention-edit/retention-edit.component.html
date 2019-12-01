@@ -1,0 +1,51 @@
+<div class="row-details">
+  <h2 translate>EDIT</h2>
+  <form [formGroup]="editRetentionForm">
+    <div class="form-group row align-items-center mr-0 ml-0">
+      <label class="font-weight-bold col-2 mb-0 text-right" translate>RULE_NAME</label>
+      <input
+        type="text"
+        class="form-control col-10"
+        id="name"
+        name="name"
+        placeholder="{{ 'RULE_NAME' | translate }}"
+        formControlName="retentionName"
+        [(ngModel)]="retentionDetails.name"
+      />
+    </div>
+    <div class="form-group row align-items-center mr-0 ml-0">
+      <label class="font-weight-bold col-2 mb-0 text-right" translate>RETENTION_PERIOD</label>
+      <input
+        type="number"
+        class="form-control col-10"
+        id="period"
+        name="period"
+        formControlName="retentionPeriod"
+        [(ngModel)]="retentionDetails.period"
+      />
+    </div>
+    <div class="form-group row">
+      <div class="offset-md-2 col-sm-10">
+        <button
+          type="submit"
+          class="btn btn-success"
+          [disabled]="editRetentionForm.invalid || showCancelConfirmation || isFormValid"
+          (click)="onRetentionUpdate()"
+          translate
+        >
+          SAVE
+        </button>
+        <button class="btn btn-success" (click)="onCancel()" [disabled]="showCancelConfirmation" translate>
+          CANCEL
+        </button>
+      </div>
+    </div>
+    <div class="form-group row" [hidden]="!showCancelConfirmation">
+      <label class="col-sm-6 col-form-label" translate>CANCEL_SURE</label>
+      <div class="col-sm-6">
+        <button (click)="back()" class="btn btn-success" translate>YES</button>
+        <button (click)="showCancelConfirmation = false" class="btn btn-default" translate>NO</button>
+      </div>
+    </div>
+  </form>
+</div>

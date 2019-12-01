@@ -1,0 +1,30 @@
+<div [formGroup]="group">
+  <ng-select
+    [items]="locationsListBuffer"
+    [virtualScroll]="true"
+    [hideSelected]="true"
+    placeholder="Location"
+    bindLabel="name"
+    [searchable]="false"
+    [loading]="loading"
+    (focus)="onLocationSelect($event)"
+    (change)="onLocationSelect($event)"
+    (clear)="onLocationClear()"
+    (scrollToEnd)="onScrollToEnd()"
+    [formControlName]="'location'"
+  >
+    <ng-template ng-option-tmp let-item="item">
+      {{ item.name }} <br />
+      <small>{{ STORAGE_LOCATIONS_TYPES[item.type] }}</small>
+    </ng-template>
+    <ng-template *ngIf="locations !== null" ng-header-tmp>
+      <input
+        class="search-input"
+        type="text"
+        [formControlName]="'locationSearch'"
+        [(ngModel)]="searchStr"
+        (ngModelChange)="onInputSearch.next($event)"
+      />
+    </ng-template>
+  </ng-select>
+</div>

@@ -1,0 +1,29 @@
+<div [formGroup]="group">
+  <ng-select
+    [items]="emailListBuffer"
+    [virtualScroll]="true"
+    [hideSelected]="true"
+    placeholder="Email"
+    bindLabel="email"
+    [searchable]="false"
+    [loading]="loading"
+    (focus)="onEmailSelect($event)"
+    (change)="onEmailChange($event)"
+    (clear)="onEmailClear($event)"
+    (scrollToEnd)="onScrollToEnd()"
+    [formControlName]="'email'"
+  >
+    <ng-template ng-option-tmp let-item="item">
+      {{ item.email }}
+    </ng-template>
+    <ng-template *ngIf="emailListBuffer !== null" ng-header-tmp>
+      <input
+        class="search-input"
+        type="text"
+        [formControlName]="'emailSearch'"
+        [(ngModel)]="searchStr"
+        (ngModelChange)="onInputSearch.next($event)"
+      />
+    </ng-template>
+  </ng-select>
+</div>

@@ -1,0 +1,22 @@
+@import "src/theme/theme-variables";
+
+.navbar {
+  margin-bottom: $spacer;
+  padding-bottom: 3px !important;
+  // -changes to make top navbar at fixed position-
+  top: 0px;
+  width: 100%;
+  position: fixed;
+  z-index: 1; /*Add this*/
+  // -end-
+}
+
+.nav-link.dropdown-toggle {
+  cursor: pointer;
+}
+
+.navbar-brand2 {
+  font-size: 14px !important;
+  line-height: 15px !important;
+  color: #777 !important;
+}

@@ -1,0 +1,149 @@
+<div>
+  <div class="card panel-default">
+    <div class="card-header h-70">
+      <div class="row ">
+        <div class="col-sm-4">
+          <a class="btn btn-primary" (click)="add()" translate>CREATE_DEVICE</a>
+        </div>
+        <div class="col-sm-4 text-center">
+          <span class="lead" translate>DEVICES</span>
+        </div>
+
+        <div class="col-sm-4">
+          <div class="btn-group float-right">
+            <a class="btn btn-light" (click)="downloadCsv()">
+              <span class="fa fa-list-alt"></span> {{ 'CSV' | translate }}
+            </a>
+            <a class="btn btn-light" (click)="clear()"> <span class="fa fa-times"></span>{{ 'RESET' | translate }} </a>
+            <button type="submit" class="btn btn-success" (click)="onSearch()">
+              <span class="fa fa-search"></span>{{ 'SEARCH' | translate }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body" [formGroup]="deviceListForm">
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="form-group">
+            <label class="font-weight-bold" translate>OWNER</label>
+            <app-user-picker
+              [options]="userSelect2Options"
+              (onChangeUsers)="onUserNameChange($event)"
+              (onClearUsers)="onUserNameClear()"
+              [group]="deviceListForm"
+            >
+            </app-user-picker>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="form-group">
+            <label class="font-weight-bold" translate>DEVICE_NAME</label>
+            <app-device-picker
+              [options]="userSelect2Options"
+              (onChangeDevices)="onDeviceNameChange($event)"
+              (onClearDevices)="onDeviceNameClear()"
+              [group]="deviceListForm"
+            ></app-device-picker>
+          </div>
+        </div>
+        <div class="col-lg-2">
+          <div class="form-group">
+            <label class="font-weight-bold" translate>ALLOCATED</label>
+            <ng-select
+              labelForId="Any"
+              placeholder="Any"
+              [searchable]="false"
+              (change)="onStatusChange($event)"
+              formControlName="allocated"
+            >
+              <ng-option [value]="true">True</ng-option>
+              <ng-option [value]="false">False</ng-option>
+            </ng-select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container2">
+      <table class="table table-hover">
+        <thead class="thead-dark">
+          <tr class="table-header">
+            <th [ngStyle]="{ width: 100 / 3 + '%' }" *ngFor="let header of headers">
+              <div class="d-flex align-items-center w-100">
+                <span>{{ header.name | translate }}</span>
+                <i
+                  class="fas fa-angle-down ml-auto angle"
+                  [ngClass]="{ 'angle-hided': !header.sort }"
+                  *ngIf="!header.reverseUserList"
+                ></i>
+                <i
+                  class="fas fa-angle-up ml-auto angle"
+                  [ngClass]="{ 'angle-hided': !header.sort }"
+                  *ngIf="header.reverseUserList"
+                ></i>
+              </div>
+            </th>
+            <th></th>
+          </tr>
+        </thead>
+      </table>
+
+      <div class="table-scroll-container">
+        <table class="table table-hover">
+          <tbody class="stripped">
+            <ng-container *ngFor="let item of deviceList">
+              <tr
+                (click)="onRowSelect(item)"
+                [ngClass]="{
+                  'info highLightBorderRow': deviceItemSelected !== null && item?.id === deviceItemSelected?.id
+                }"
+              >
+                <td [ngStyle]="{ width: 100 / 3 + '%' }">
+                  {{ deviceItemSelected?.id === item.id ? deviceItemSelected.name : item.name }}
+                </td>
+                <td [ngStyle]="{ width: 100 / 3 + '%' }">
+                  {{ deviceItemSelected?.id === item.id ? deviceItemSelected.userFullName : item.userFullName }}
+                </td>
+                <td
+                  [ngStyle]="{ width: 100 / 3 + '%' }"
+                  *ngIf="deviceItemSelected?.id === item.id ? deviceItemSelected.isAllocated : item.isAllocated"
+                >
+                  <i class="fas fa-check"></i>
+                </td>
+                <td
+                  [ngStyle]="{ width: 100 / 3 + '%' }"
+                  *ngIf="!(deviceItemSelected?.id === item.id ? deviceItemSelected.isAllocated : item.isAllocated)"
+                >
+                  <i class="fas fa-times"></i>
+                </td>
+              </tr>
+              <tr class="highLightBorder" *ngIf="deviceItemSelected !== null && item?.id === deviceItemSelected?.id">
+                <td colspan="5" class="noHoverEffect">
+                  <router-outlet></router-outlet>
+                </td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <app-pagination [paginationInfo]="paginationInfo" (onChange)="onPageChange($event)"></app-pagination>
+        </div>
+        <div class="col-sm-6">
+          <app-page-size-picker
+            class="pull-right"
+            [paginationInfo]="paginationInfo"
+            [options]="[5, 10, 25, 50, 75, 100]"
+            (onChange)="onPageSizeSelect($event)"
+          >
+          </app-page-size-picker>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6"></div>
+        <div class="col-6"></div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,16 @@
+<div class="row-details">
+  <h2 *ngIf="userDetails.active" translate>ENABLE</h2>
+  <h2 *ngIf="!userDetails.active" translate>DISABLE</h2>
+  <div class="form-group row">
+    <label class="col-sm-6 col-form-label" translate>Are you sure?</label>
+    <div class="col-sm-6">
+      <button (click)="onUserUpdate(false)" *ngIf="userDetails.active" class="btn btn-success" translate>
+        DISABLE
+      </button>
+      <button (click)="onUserUpdate(true)" *ngIf="!userDetails.active" class="btn btn-success" translate>
+        ENABLE
+      </button>
+      <button (click)="back()" class="btn btn-default" translate>CANCEL</button>
+    </div>
+  </div>
+</div>

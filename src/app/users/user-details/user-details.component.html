@@ -1,0 +1,57 @@
+<div class="row-details">
+  <h2 translate>DETAILS</h2>
+  <div class="row">
+    <div class="col-md-2">
+      <label class="col-sm-10 font-weight-bold" translate>FULLNAME</label>
+    </div>
+    <div class="col-md-3">
+      <span>{{ userDetails.fullName }}</span>
+    </div>
+    <div class="col-md-2">
+      <label class="col-sm-10 font-weight-bold" translate>ENABLED</label>
+    </div>
+    <div class="col-md-2">
+      <span *ngIf="userDetails.active"><i class="fas fa-check"></i></span>
+      <span *ngIf="!userDetails.active"><i class="fas fa-times"></i></span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-2">
+      <label class="col-md-10 font-weight-bold" translate>EMAIL</label>
+    </div>
+    <div class="col-md-3">
+      <span>{{ userDetails.email }}</span>
+    </div>
+    <div class="col-md-2">
+      <label class="col-sm-10 font-weight-bold" translate>ROLE</label>
+    </div>
+    <div class="col-md-2">
+      <span>{{ userDetails._embedded?.role.name }}</span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-2">
+      <label class="col-md-12 font-weight-bold pr-0" translate>Active directory user?</label>
+    </div>
+    <div class="col-md-2">
+      <span *ngIf="userDetails.adUser"><i class="fas fa-check"></i></span>
+      <span *ngIf="!userDetails.adUser"><i class="fas fa-times"></i></span>
+    </div>
+    <div class="offset-1 col-md-2">
+      <label class="col-sm-10 font-weight-bold" translate>GROUPS</label>
+    </div>
+    <div class="col-md-2">
+      <ul *ngFor="let group of groups" class="pl-0 mb-0">
+        <li class="list-style-none">{{ group.name }}</li>
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-2">
+      <label class="col-md-10 font-weight-bold" translate>USERNAME</label>
+    </div>
+    <div class="col-md-10">
+      <span>{{ userDetails.userName }}</span>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,154 @@
+<div class="card panel-default">
+  <div class="card-header">
+    <div class="row">
+      <div class="col-sm-12 text-center">
+        <span class="lead" translate>CREATE_STORAGE_LOCATION</span>
+      </div>
+    </div>
+  </div>
+  <div class="container2 form">
+    <form novalidate class="form-horizontal css-form" [formGroup]="locationNewForm">
+      <div class="form-group row align-items-center mr-0 ml-0">
+        <label class="font-weight-bold col-2 mb-0 text-right" translate>NAME</label>
+        <input
+          type="text"
+          class="form-control col-10"
+          id="locationName"
+          name="locationName"
+          placeholder="{{ 'NAME' | translate }}"
+          formControlName="locationName"
+        />
+      </div>
+      <div class="form-group row align-items-center mr-0 ml-0">
+        <label class="font-weight-bold col-2 mb-0 text-right" translate>TYPE</label>
+        <ng-select
+          class="col-10 p-0"
+          labelForId="Any"
+          placeholder="{{ 'LOCATION_TYPE' | translate }}"
+          [searchable]="false"
+          formControlName="locationType"
+        >
+          <ng-option [value]="'Local'" translate>Local</ng-option>
+          <ng-option [value]="'UNC'">UNC</ng-option>
+          <ng-option [value]="'EMC'">EMC</ng-option>
+          <ng-option [value]="'Azure Blop'" translate>Azure Blop</ng-option>
+        </ng-select>
+      </div>
+      <div
+        *ngIf="locationNewForm.value.locationType === 'Local' || locationNewForm.value.locationType === 'UNC'"
+        class="form-group row align-items-center mr-0 ml-0"
+      >
+        <label class="font-weight-bold col-2 mb-0 text-right" translate>ROOT_PATH</label>
+        <input
+          type="text"
+          class="form-control col-10"
+          name="rootPath"
+          placeholder="{{ 'ROOT_PATH' | translate }}"
+          formControlName="rootPath"
+        />
+      </div>
+      <ng-container *ngIf="locationNewForm.value.locationType === 'UNC'">
+        <div class="form-group row align-items-center mr-0 ml-0">
+          <label class="font-weight-bold col-2 mb-0 text-right" translate>Use Service Credentials?</label>
+          <input type="checkbox" id="active" name="active" (change)="onActiveCheckbox()" formControlName="active" />
+        </div>
+        <div class="form-group row align-items-center mr-0 ml-0">
+          <label class="font-weight-bold col-2 mb-0 text-right" translate>USERNAME</label>
+          <input
+            type="text"
+            class="form-control col-10"
+            name="username"
+            placeholder="{{ 'Username' | translate }}"
+            formControlName="username"
+          />
+        </div>
+        <div class="form-group row align-items-center mr-0 ml-0">
+          <label class="font-weight-bold col-2 mb-0 text-right" translate>PASSWORD</label>
+          <input
+            type="password"
+            class="form-control col-10"
+            id="password"
+            name="password"
+            placeholder="{{ 'PASSWORD' | translate }}"
+            formControlName="password"
+          />
+        </div>
+        <div class="form-group row align-items-center mr-0 ml-0">
+          <label class="font-weight-bold col-2 mb-0 text-right" translate>CONFIRMATION</label>
+          <input
+            type="password"
+            class="form-control col-10"
+            id="confirmation"
+            name="confirmation"
+            placeholder="{{ 'Password confirmation' | translate }}"
+            formControlName="confirmation"
+          />
+        </div>
+      </ng-container>
+      <ng-container *ngIf="locationNewForm.value.locationType === 'EMC'">
+        <div class="form-group row align-items-center mr-0 ml-0">
+          <label class="font-weight-bold col-2 mb-0 text-right" translate>EMC IP Address</label>
+          <input
+            type="text"
+            class="form-control col-10"
+            name="ip"
+            placeholder="{{ 'EMC IP Address' | translate }}"
+            formControlName="ip"
+          />
+        </div>
+        <div class="form-group row mr-0 ml-0">
+          <label class="font-weight-bold col-2 mb-0 mt-1 text-right" translate>EMC PEA Information</label>
+          <textarea
+            type="text"
+            class="form-control col-10"
+            name="info"
+            placeholder="{{ 'Paste the hole contents of your EMC file here' | translate }}"
+            formControlName="info"
+            rows="10"
+          ></textarea>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="locationNewForm.value.locationType === 'Azure Blop'">
+        <div class="form-group row align-items-center mr-0 ml-0">
+          <label class="font-weight-bold col-2 mb-0 text-right" translate>Connection String</label>
+          <input
+            type="text"
+            class="form-control col-10"
+            name="connection"
+            placeholder="{{ 'Connection String' | translate }}"
+            formControlName="connection"
+          />
+        </div>
+      </ng-container>
+      <div class="form-group row">
+        <div class="offset-md-2 col-sm-10">
+          <button
+            type="submit"
+            class="btn btn-success"
+            [disabled]="locationNewForm.invalid"
+            translate
+            (click)="onLocationCreate()"
+          >
+            {{ 'SAVE' | translate }}
+          </button>
+          <button class="btn btn-success" (click)="onCancel()" [disabled]="showCancelConfirmation">
+            {{ 'CANCEL' | translate }}
+          </button>
+        </div>
+      </div>
+      <div class="form-group row" [hidden]="!showCancelConfirmation">
+        <label class="col-sm-6 col-form-label" translate>CANCEL_SURE</label>
+        <div class="col-sm-6">
+          <button (click)="confirm(); shellService.changeState(true)" class="btn btn-success" translate>YES</button>
+          <button
+            (click)="showCancelConfirmation = false; shellService.changeState(true)"
+            class="btn btn-default"
+            translate
+          >
+            NO
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,62 @@
+<div>
+  <h2 translate>EDIT_LOCATIONS</h2>
+  <form novalidate class="form-horizontal css-form" role="form" name="form" [formGroup]="locationsListForm">
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label" translate>AVAILABLE_LOCATIONS</label>
+      <div class="col-sm-10">
+        <app-location-picker
+          (changeLocations)="onLocationAdd($event)"
+          [group]="locationsListForm"
+        ></app-location-picker>
+      </div>
+    </div>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th translate>NAME</th>
+          <th translate>TYPE</th>
+          <th translate class="text-center">REMOVE</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngIf="locations?.length === 0">
+          <tr>
+            <td colspan="3" class="text-center" translate>THERE_ARE_NO_ELEMENTS</td>
+          </tr>
+        </ng-container>
+        <ng-container *ngFor="let location of locations; let i = index">
+          <tr>
+            <td>{{ location.name }}</td>
+            <td>{{ locationTypes[location.type] }}</td>
+            <td class="text-center">
+              <a [routerLink]="" (click)="onLocationDelete(i)"><i class="fas fa-times"></i></a>
+            </td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+    <div class="form-group row">
+      <div class="offset-md-2 col-sm-10">
+        <button
+          type="submit"
+          class="btn btn-success"
+          [disabled]="locationsListForm.invalid || showCancelConfirmation || !state"
+          translate
+          (click)="onStorageRuleUpdate()"
+        >
+          {{ 'SAVE' | translate }}
+        </button>
+        <button class="btn btn-success" (click)="onCancel()" [disabled]="showCancelConfirmation">
+          {{ 'CANCEL' | translate }}
+        </button>
+      </div>
+    </div>
+    <div class="form-group row" [hidden]="!showCancelConfirmation">
+      <label class="col-sm-6 col-form-label" translate>CANCEL_SURE</label>
+      <div class="col-sm-6">
+        <button (click)="back()" class="btn btn-success" translate>YES</button>
+        <button (click)="showCancelConfirmation = false" class="btn btn-default" translate>NO</button>
+      </div>
+    </div>
+  </form>
+</div>

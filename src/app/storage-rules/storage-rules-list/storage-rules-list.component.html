@@ -1,0 +1,138 @@
+<div>
+  <div class="card panel-default">
+    <div class="card-header h-70">
+      <div class="row">
+        <div class="col-sm-4">
+          <a class="btn btn-primary" (click)="add()" translate>CREATE_STORAGE_RULE</a>
+        </div>
+        <div class="col-sm-4 text-center">
+          <span class="lead" translate>STORAGE_RULES</span>
+        </div>
+
+        <div class="col-sm-4">
+          <div class="btn-group float-right">
+            <a class="btn btn-light" (click)="downloadCsv()">
+              <span class="fa fa-list-alt"></span> {{ 'CSV' | translate }}
+            </a>
+            <a class="btn btn-light" (click)="clear()"> <span class="fa fa-times"></span>{{ 'RESET' | translate }} </a>
+            <button type="submit" class="btn btn-success" (click)="onSearch()">
+              <span class="fa fa-search"></span>{{ 'SEARCH' | translate }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-body" [formGroup]="storageRulesListForm">
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="form-group">
+            <label class="font-weight-bold" translate>NAME</label>
+            <div>
+              <app-storage-rules-picker
+                (changeStorageRuleName)="onStorageRuleSelect($event)"
+                (clearStorageRuleName)="onStorageRulePickerClear()"
+                [storageRules]="storageRulesList"
+                [group]="storageRulesListForm"
+              >
+              </app-storage-rules-picker>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-2">
+          <div class="form-group">
+            <label class="font-weight-bold" translate>STATUS</label>
+            <ng-select
+              labelForId="Any"
+              placeholder="Any"
+              [searchable]="false"
+              (change)="onstorageRuleStatusSelect($event)"
+              formControlName="storageRuleStatus"
+            >
+              <ng-option [value]="true" translate>ENABLED</ng-option>
+              <ng-option [value]="false" translate>DISABLED</ng-option>
+            </ng-select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container2">
+      <table class="table table-hover">
+        <thead class="thead-dark">
+          <tr class="table-header">
+            <th
+              [ngStyle]="{ width: 100 / 5 + '%' }"
+              *ngFor="let header of tableHeaders"
+              (click)="invertStorageRulesList(header)"
+            >
+              <div class="d-flex align-items-center w-100">
+                <span>{{ header.name | translate }}</span>
+                <i
+                  class="fas fa-angle-down ml-auto angle"
+                  [ngClass]="{ 'angle-hided': !header.sort }"
+                  *ngIf="!header.reverseList"
+                ></i>
+                <i
+                  class="fas fa-angle-up ml-auto angle"
+                  [ngClass]="{ 'angle-hided': !header.sort }"
+                  *ngIf="header.reverseList"
+                ></i>
+              </div>
+            </th>
+          </tr>
+        </thead>
+      </table>
+
+      <div class="table-scroll-container">
+        <table class="table table-hover">
+          <tbody class="stripped">
+            <ng-container *ngFor="let item of storageRulesList">
+              <tr
+                (click)="onRowSelect(item)"
+                [ngClass]="{
+                  'info highLightBorderRow':
+                    storageRuleItemSelected !== null && item?.id === storageRuleItemSelected?.id
+                }"
+              >
+                <td [ngStyle]="{ width: 100 / 2 + '%' }">
+                  {{ storageRuleItemSelected?.name === item.name ? storageRuleItemSelected.name : item.name }}
+                </td>
+                <td [ngStyle]="{ width: 100 / 2 + '%' }">
+                  <i class="fas" [ngClass]="item.active ? 'fa-check' : 'fa-times'"></i>
+                </td>
+              </tr>
+              <tr
+                class="highLightBorder"
+                *ngIf="storageRuleItemSelected !== null && item?.id === storageRuleItemSelected?.id"
+              >
+                <td colspan="2" class="noHoverEffect">
+                  <router-outlet></router-outlet>
+                </td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6">
+          <app-pagination [paginationInfo]="paginationInfo" (onChange)="onPageChange($event)"></app-pagination>
+        </div>
+        <div class="col-sm-6">
+          <app-page-size-picker
+            class="pull-right"
+            [paginationInfo]="paginationInfo"
+            [options]="[5, 10, 25, 50, 75, 100]"
+            (onChange)="onPageSizeSelect($event)"
+          >
+          </app-page-size-picker>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6"></div>
+        <div class="col-6"></div>
+      </div>
+    </div>
+  </div>
+</div>

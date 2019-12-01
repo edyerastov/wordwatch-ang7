@@ -1,0 +1,17 @@
+<div>
+  <div class="text-center">
+    <div>
+      <a class="btn btn-secondary" (click)="onSelect('edit')" translate skipLocationChange>EDIT</a>
+      <a class="btn btn-secondary" *ngIf="!isDefault" (click)="onSelect('edit-targets')" translate skipLocationChange
+        >EDIT_TARGETS</a
+      >
+      <a class="btn btn-secondary" *ngIf="!isDefault" (click)="onSelect('enable')" translate skipLocationChange
+        >ENABLE_DISABLE</a
+      >
+      <a class="btn btn-secondary" *ngIf="!isDefault" (click)="onSelect('delete')" translate skipLocationChange
+        >DELETE</a
+      >
+    </div>
+  </div>
+  <router-outlet></router-outlet>
+</div>

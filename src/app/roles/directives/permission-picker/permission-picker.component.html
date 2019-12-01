@@ -1,0 +1,12 @@
+<div [formGroup]="group">
+  <ng-select
+    [items]="permissions"
+    placeholder="Permissions"
+    [searchable]="true"
+    [(ngModel)]="selected"
+    [multiple]="true"
+    (change)="onItemSelect($event)"
+    [formControlName]="'permissions'"
+  >
+  </ng-select>
+</div>

@@ -1,0 +1,121 @@
+<div class="card panel-default">
+  <div class="card-header">
+    <div class="row">
+      <div class="col-sm-12 text-center">
+        <span class="lead" translate>CREATE_USER</span>
+      </div>
+    </div>
+  </div>
+  <div class="container2 form">
+    <form novalidate class="form-horizontal css-form" [formGroup]="userNewForm">
+      <div class="form-group row align-items-center mr-0 ml-0">
+        <label class="font-weight-bold offset-1 col-1 mb-0 text-right" translate>FULLNAME</label>
+        <input
+          type="text"
+          class="form-control col-10"
+          id="fullname"
+          name="fullname"
+          placeholder="{{ 'FULLNAME' | translate }}"
+          formControlName="fullname"
+        />
+      </div>
+      <div class="form-group row align-items-center mr-0 ml-0">
+        <label class="font-weight-bold offset-1 col-1 mb-0 text-right" translate>EMAIL</label>
+        <input
+          type="email"
+          class="form-control col-10"
+          id="email"
+          name="email"
+          placeholder="{{ 'EMAIL' | translate }}"
+          formControlName="email"
+        />
+      </div>
+      <div class="form-group row align-items-center mr-0 ml-0">
+        <label class="font-weight-bold col-2 mb-0 text-right" translate>Active Directory User?</label>
+        <input type="checkbox" id="active" name="active" (change)="onActiveCheckbox()" formControlName="active" />
+      </div>
+      <div class="form-group row align-items-center mr-0 ml-0">
+        <label class="font-weight-bold col-2 mb-0 text-right" translate>USERNAME</label>
+        <input
+          type="text"
+          class="form-control col-10"
+          id="username"
+          name="username"
+          placeholder="{{ 'USERNAME' | translate }}"
+          formControlName="username"
+        />
+      </div>
+      <div class="form-group row align-items-center mr-0 ml-0">
+        <label class="font-weight-bold col-2 mb-0 text-right" translate>PASSWORD</label>
+        <input
+          type="password"
+          class="form-control col-10"
+          id="password"
+          name="password"
+          placeholder="{{ 'PASSWORD' | translate }}"
+          formControlName="password"
+        />
+      </div>
+      <div class="form-group row align-items-center mr-0 ml-0">
+        <label class="font-weight-bold col-2 mb-0 text-right" translate>CONFIRMATION</label>
+        <input
+          type="password"
+          class="form-control col-10"
+          id="confirmation"
+          name="confirmation"
+          placeholder="{{ 'Password confirmation' | translate }}"
+          formControlName="confirmation"
+        />
+      </div>
+      <div class="form-group row align-items-center mr-0 ml-0">
+        <label class="font-weight-bold col-2 mb-0 text-right" translate>ROLE</label>
+        <app-role-picker
+          class="col-10 p-0"
+          [options]="roleSelect2Options"
+          (onChange)="onRoleChange($event)"
+          (onClear)="onRoleClear($event)"
+          [group]="userNewForm"
+        ></app-role-picker>
+        <div class="offset-2 col-10 p-0 mt-2" *ngIf="userNewForm.value.roles !== null">
+          <span class="font-weight-bold">This user can:</span>
+          <ul class="pl-3 mb-0">
+            <li *ngFor="let permission of rolePermissions">{{ permission }}</li>
+          </ul>
+        </div>
+      </div>
+      <div class="form-group row align-items-center mr-0 ml-0">
+        <label class="font-weight-bold col-2 mb-0 text-right pl-0" translate>Change password at next login</label>
+        <input type="checkbox" id="changePass" name="changePass" formControlName="changePass" />
+      </div>
+      <div class="form-group row">
+        <div class="offset-md-2 col-sm-10">
+          <button
+            type="submit"
+            class="btn btn-success"
+            [disabled]="userNewForm.invalid"
+            translate
+            (click)="onUserCreate()"
+          >
+            {{ 'SAVE' | translate }}
+          </button>
+          <button class="btn btn-success" (click)="onCancel()" [disabled]="showCancelConfirmation">
+            {{ 'CANCEL' | translate }}
+          </button>
+        </div>
+      </div>
+      <div class="form-group row" [hidden]="!showCancelConfirmation">
+        <label class="col-sm-6 col-form-label" translate>CANCEL_SURE</label>
+        <div class="col-sm-6">
+          <button (click)="confirm(); shellService.changeState(true)" class="btn btn-success" translate>YES</button>
+          <button
+            (click)="showCancelConfirmation = false; shellService.changeState(true)"
+            class="btn btn-default"
+            translate
+          >
+            NO
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

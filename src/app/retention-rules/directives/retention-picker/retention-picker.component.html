@@ -1,0 +1,26 @@
+<div [formGroup]="group">
+  <ng-select
+    [items]="retentionListBuffer"
+    [virtualScroll]="true"
+    [hideSelected]="true"
+    placeholder="Role"
+    bindLabel="label"
+    [searchable]="false"
+    [loading]="loading"
+    (focus)="onItemSelect($event)"
+    (change)="onItemSelect($event)"
+    (clear)="onItemClear()"
+    (scrollToEnd)="onScrollToEnd()"
+    [formControlName]="'retention'"
+  >
+    <ng-template *ngIf="options?.searchable" ng-header-tmp>
+      <input
+        class="search-input"
+        type="text"
+        [formControlName]="'retentionSearch'"
+        [(ngModel)]="searchStr"
+        (ngModelChange)="onInputSearch.next($event)"
+      />
+    </ng-template>
+  </ng-select>
+</div>

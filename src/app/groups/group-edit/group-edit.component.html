@@ -1,0 +1,97 @@
+<div class="row-details">
+  <h2 translate>EDIT</h2>
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="form-group" *ngIf="groupType === 'User'">
+        <label class="font-weight-bold" translate>ADD_USER</label>
+        <app-user-picker [options]="userSelect2Options" (onChangeUsers)="onAddItem($event)" [group]="groupEditForm">
+        </app-user-picker>
+      </div>
+      <div class="form-group" *ngIf="groupType === 'Device'">
+        <label class="font-weight-bold" translate>Add device</label>
+        <app-device-picker [options]="userSelect2Options" (onChangeDevices)="onAddItem($event)" [group]="groupEditForm">
+        </app-device-picker>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="form-group">
+        <label class="font-weight-bold">Search</label>
+        <div class="input-group">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Search..."
+            aria-describedby="button-addon"
+            [(ngModel)]="searchStr"
+            (ngModelChange)="onInputSearch.next($event)"
+          />
+          <div class="input-group-append">
+            <button
+              class="btn btn-default"
+              type="button"
+              id="button-addon"
+              (click)="getGroupDetails({ id: this.groupId, query: searchStr })"
+            >
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <table class="table table-hover" *ngIf="groupType === 'User'">
+    <thead>
+      <tr>
+        <th translate>USERNAME</th>
+        <th translate>FULLNAME</th>
+        <th translate>EMAIL</th>
+        <th translate>ROLE</th>
+        <th translate class="text-center">ENABLED</th>
+        <th translate class="text-center">REMOVE</th>
+      </tr>
+    </thead>
+    <tbody *ngIf="groupList?.length !== 0">
+      <ng-container *ngFor="let user of groupList; let i = index">
+        <tr>
+          <td>{{ user.userName }}</td>
+          <td>{{ user.fullName }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.roleName }}</td>
+          <td class="text-center">
+            <i class="fas fa-check" *ngIf="user.active"></i>
+            <i class="fas fa-times" *ngIf="!user.active"></i>
+          </td>
+          <td class="text-center">
+            <a [routerLink]="" (click)="deleteItem(user, i)"><i class="fas fa-times"></i></a>
+          </td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+  <table class="table table-hover" *ngIf="groupType === 'Device'">
+    <thead>
+      <tr>
+        <th translate>DEVICES</th>
+        <th translate>USER</th>
+        <th translate class="text-center">ALLOCATED</th>
+        <th translate class="text-center">REMOVE</th>
+      </tr>
+    </thead>
+    <tbody *ngIf="groupList?.length !== 0">
+      <ng-container *ngFor="let device of groupList; let i = index">
+        <tr>
+          <td>{{ device.name }}</td>
+          <td>{{ device.userFullName }}</td>
+          <td class="text-center">
+            <i class="fas fa-check" *ngIf="device.isAllocated"></i>
+            <i class="fas fa-times" *ngIf="!device.isAllocated"></i>
+          </td>
+          <td class="text-center">
+            <a [routerLink]="" (click)="deleteItem(device, i)"><i class="fas fa-times"></i></a>
+          </td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+  <span class="text-center no-elements" *ngIf="groupList?.length === 0">There are no elements to display.</span>
+</div>

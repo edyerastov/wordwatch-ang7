@@ -1,0 +1,39 @@
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #CEE5F3;">
+    <a class="navbar-brand" href="#/" translate>
+      <img style="margin-top: -3px; margin-right: 2px;" src="assets/vocalIconSmall.png" />
+      <div style="position: fixed; top: 10px; left: 50px;" class="navbar-brand2">
+        <div><span style="font-weight: bold;" translate>Wordwatch</span></div>
+        <div><span style="position: fixed; left: 54px;" translate>Federation</span></div>
+      </div>
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      aria-controls="navbar-menu"
+      aria-label="Toggle navigation"
+      (click)="toggleMenu()"
+      [attr.aria-expanded]="!menuHidden"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar-menu" class="collapse navbar-collapse" [ngbCollapse]="menuHidden">
+      <div class="navbar-nav ml-auto">
+        <div class="nav-item ml-auto" ngbDropdown>
+          <a
+            id="user-dropdown"
+            class="nav-link"
+            ngbDropdownToggle
+            [innerHTML]="'WELCOME_LOGIN' | translate: { userName: 'System Administrator' }"
+          >
+          </a>
+          <div ngbDropdownMenu aria-labelledby="user-dropdown">
+            <button class="dropdown-item" translate>Change Password</button>
+            <button class="dropdown-item" (click)="logout()" translate>Logout</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>

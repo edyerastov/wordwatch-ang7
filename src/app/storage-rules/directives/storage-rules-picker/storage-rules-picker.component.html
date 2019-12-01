@@ -1,0 +1,27 @@
+<div [formGroup]="group">
+  <ng-select
+    [items]="storageRulesListBuffer"
+    [virtualScroll]="true"
+    placeholder="Name"
+    bindLabel="name"
+    [searchable]="true"
+    [loading]="loading"
+    (change)="onStorageRuleSelect($event)"
+    (clear)="onStorageRuleClear()"
+    (scrollToEnd)="onScrollToEnd()"
+    [formControlName]="'storageRuleSearch'"
+  >
+    <ng-template ng-option-tmp let-item="item">
+      {{ item.name }}
+    </ng-template>
+    <ng-template *ngIf="storageRules !== null" ng-header-tmp>
+      <input
+        class="search-input"
+        type="text"
+        [formControlName]="'storageRuleSearch'"
+        [(ngModel)]="searchStr"
+        (ngModelChange)="onInputSearch.next($event)"
+      />
+    </ng-template>
+  </ng-select>
+</div>

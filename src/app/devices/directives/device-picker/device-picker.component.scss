@@ -1,0 +1,9 @@
+.search-input {
+  width: 100%;
+}
+::ng-deep .ng-option {
+  display: flex !important;
+  flex-direction: column;
+  height: 49px;
+  justify-content: center;
+}

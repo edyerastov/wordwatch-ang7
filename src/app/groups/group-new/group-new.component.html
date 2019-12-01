@@ -1,0 +1,66 @@
+<div class="card panel-default">
+  <div class="card-header">
+    <div class="row">
+      <div class="col-sm-12 text-center">
+        <span class="lead" translate>CREATE_GROUP</span>
+      </div>
+    </div>
+  </div>
+  <div class="container2 form">
+    <form novalidate class="form-horizontal css-form" [formGroup]="groupNewForm">
+      <div class="form-group row align-items-center mr-0 ml-0">
+        <label class="font-weight-bold col-2 mb-0 text-right" translate>GROUP_NAME</label>
+        <input
+          type="text"
+          class="form-control col-10"
+          id="deviceName"
+          name="groupName"
+          placeholder="{{ 'GROUP_NAME' | translate }}"
+          formControlName="groupName"
+        />
+      </div>
+      <div class="form-group row align-items-center mr-0 ml-0">
+        <label class="font-weight-bold col-2 mb-0 text-right" translate>GROUP_TYPE</label>
+        <ng-select
+          class="col-10 p-0"
+          labelForId="Any"
+          placeholder="{{ 'GROUP_TYPE' | translate }}"
+          [searchable]="false"
+          formControlName="groupType"
+        >
+          <ng-option [value]="'User'" translate>USER</ng-option>
+          <ng-option [value]="'Device'" translate>DEVICE</ng-option>
+        </ng-select>
+      </div>
+      <div class="form-group row">
+        <div class="offset-md-2 col-sm-10">
+          <button
+            type="submit"
+            class="btn btn-success"
+            [disabled]="groupNewForm.invalid"
+            translate
+            (click)="onGroupCreate()"
+          >
+            {{ 'SAVE' | translate }}
+          </button>
+          <button class="btn btn-success" (click)="onCancel()" [disabled]="showCancelConfirmation">
+            {{ 'CANCEL' | translate }}
+          </button>
+        </div>
+      </div>
+      <div class="form-group row" [hidden]="!showCancelConfirmation">
+        <label class="col-sm-6 col-form-label" translate>CANCEL_SURE</label>
+        <div class="col-sm-6">
+          <button (click)="confirm(); shellService.changeState(true)" class="btn btn-success" translate>YES</button>
+          <button
+            (click)="showCancelConfirmation = false; shellService.changeState(true)"
+            class="btn btn-default"
+            translate
+          >
+            NO
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

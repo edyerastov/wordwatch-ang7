@@ -1,0 +1,7 @@
+<div class="row-details">
+  <h2 translate>DETAILS</h2>
+  <label class="font-weight-bold" translate>GROUPS</label>
+  <ul *ngFor="let group of groups" class="pl-0 mb-0">
+    <li class="list-style-none" *ngIf="group.name !== null">{{ group.name }}</li>
+  </ul>
+</div>

@@ -1,0 +1,129 @@
+<div>
+  <div class="card panel-default">
+    <div class="card-header h-70">
+      <div class="row ">
+        <div class="col-sm-4">
+          <a class="btn btn-primary" (click)="add()" translate>CREATE_ROLE</a>
+        </div>
+        <div class="col-sm-4 text-center">
+          <span class="lead" translate>ROLES</span>
+        </div>
+
+        <div class="col-sm-4">
+          <div class="btn-group float-right">
+            <a class="btn btn-light" (click)="downloadCsv()">
+              <span class="fa fa-list-alt"></span> {{ 'CSV' | translate }}
+            </a>
+            <a class="btn btn-light" (click)="clear($event)">
+              <span class="fa fa-times"></span>{{ 'RESET' | translate }}
+            </a>
+            <button type="submit" class="btn btn-success" (click)="onSearch()">
+              <span class="fa fa-search"></span>{{ 'SEARCH' | translate }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="row" [formGroup]="roleListForm">
+        <div class="col-lg-4">
+          <div class="form-group">
+            <label class="font-weight-bold">Name</label>
+            <div>
+              <app-role-picker
+                [options]="nameSelect2Options"
+                (onChange)="onRoleNameChange($event)"
+                (onClear)="onRoleNameClear($event)"
+                [group]="roleListForm"
+              ></app-role-picker>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-2">
+          <div class="form-group">
+            <label class="font-weight-bold">Search Profile</label>
+            <div>
+              <app-search-profile-picker
+                [options]="profileSelect2Options"
+                (onChange)="onProfileSelect($event)"
+                (onClear)="onSearchProfileClear($event)"
+                [group]="roleListForm"
+              >
+              </app-search-profile-picker>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container2">
+      <table class="table table-hover">
+        <thead class="thead-dark">
+          <tr class="table-header">
+            <th [ngStyle]="{ width: 100 / 2 + '%' }" (click)="invertRoleList()">
+              <div class="d-flex align-items-center w-100">
+                <span>{{ 'ROLE_NAME' | translate }}</span>
+                <i
+                  class="fas fa-angle-down ml-auto angle"
+                  [ngClass]="{ 'angle-hided': !sort }"
+                  *ngIf="!reverseRoleList"
+                ></i>
+                <i
+                  class="fas fa-angle-up ml-auto angle"
+                  [ngClass]="{ 'angle-hided': !sort }"
+                  *ngIf="reverseRoleList"
+                ></i>
+              </div>
+            </th>
+            <th [ngStyle]="{ width: 100 / 2 + '%' }">{{ 'SEARCH_PROFILE' | translate }}</th>
+            <th></th>
+          </tr>
+        </thead>
+      </table>
+
+      <div class="table-scroll-container">
+        <table class="table table-hover">
+          <tbody class="stripped">
+            <ng-container *ngFor="let item of roleList">
+              <tr
+                (click)="onRowSelect(item)"
+                [ngClass]="{
+                  'info highLightBorderRow': roleItemSelected !== null && item?.id === roleItemSelected?.id
+                }"
+              >
+                <td [ngStyle]="{ width: 100 / 2 + '%' }">
+                  {{ roleItemSelected?.id === item.id ? roleItemSelected.name : item.name }}
+                </td>
+                <td [ngStyle]="{ width: 100 / 2 + '%' }">
+                  {{ roleItemSelected?.id === item.id ? roleItemSelected.searchProfileType : item.searchProfileType }}
+                </td>
+              </tr>
+              <tr class="highLightBorder" *ngIf="roleItemSelected !== null && item?.id === roleItemSelected?.id">
+                <td colspan="2" class="noHoverEffect">
+                  <router-outlet> </router-outlet>
+                </td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <app-pagination [paginationInfo]="paginationInfo" (onChange)="onPageChange($event)"></app-pagination>
+        </div>
+        <div class="col-sm-6">
+          <app-page-size-picker
+            class="pull-right"
+            [paginationInfo]="paginationInfo"
+            [options]="[5, 10, 25, 50, 75, 100]"
+            (onChange)="onPageSizeSelect($event)"
+          >
+          </app-page-size-picker>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6"></div>
+        <div class="col-6"></div>
+      </div>
+    </div>
+  </div>
+</div>

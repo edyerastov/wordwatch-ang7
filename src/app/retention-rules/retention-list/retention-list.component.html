@@ -1,0 +1,164 @@
+<div>
+  <div class="card panel-default">
+    <div class="card-header h-70">
+      <div class="row ">
+        <div class="col-sm-4">
+          <a class="btn btn-primary" (click)="add()" translate>CREATE_RETENTION_RULE</a>
+        </div>
+        <div class="col-sm-4 text-center">
+          <span class="lead" translate>RETENTION_RULES</span>
+        </div>
+
+        <div class="col-sm-4">
+          <div class="btn-group float-right">
+            <a class="btn btn-light" (click)="downloadCsv()">
+              <span class="fa fa-list-alt"></span> {{ 'CSV' | translate }}
+            </a>
+            <a class="btn btn-light" (click)="clear($event)">
+              <span class="fa fa-times"></span>{{ 'RESET' | translate }}
+            </a>
+            <button type="submit" class="btn btn-success" (click)="onSearch()">
+              <span class="fa fa-search"></span>{{ 'SEARCH' | translate }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="row" [formGroup]="retentionListForm">
+        <div class="col-lg-4">
+          <div class="form-group">
+            <label class="font-weight-bold" translate>NAME</label>
+            <div>
+              <app-retention-picker
+                (onChange)="onRetentionNameChange($event)"
+                (onClear)="onRetentionNameClear()"
+                [options]="nameSelect2Options"
+                [group]="retentionListForm"
+              >
+              </app-retention-picker>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-2">
+          <div class="form-group">
+            <label class="font-weight-bold" translate>STATUS</label>
+            <ng-select
+              labelForId="Any"
+              placeholder="Any"
+              [searchable]="false"
+              (change)="onStatusSelect($event)"
+              formControlName="retentionStatus"
+            >
+              <ng-option [value]="true">Enabled</ng-option>
+              <ng-option [value]="false">Disabled</ng-option>
+            </ng-select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container2">
+      <table class="table table-hover">
+        <thead class="thead-dark">
+          <tr class="table-header">
+            <th [ngStyle]="{ width: 5 + '%' }">#</th>
+            <th [ngStyle]="{ width: 45 + '%' }" (click)="invertRetentionList()">
+              <div class="d-flex align-items-center w-100">
+                <span>{{ 'RULE_NAME' | translate }}</span>
+                <i
+                  class="fas fa-angle-down ml-auto angle"
+                  [ngClass]="{ 'angle-hided': !sort }"
+                  *ngIf="!reverseRetentionList"
+                ></i>
+                <i
+                  class="fas fa-angle-up ml-auto angle"
+                  [ngClass]="{ 'angle-hided': !sort }"
+                  *ngIf="reverseRetentionList"
+                ></i>
+              </div>
+            </th>
+            <th [ngStyle]="{ width: 25 + '%' }" (click)="invertRetentionList()">
+              <div class="d-flex align-items-center w-100">
+                <span>{{ 'RETENTION_PERIOD' | translate }}</span>
+                <i
+                  class="fas fa-angle-down ml-auto angle"
+                  [ngClass]="{ 'angle-hided': !sort }"
+                  *ngIf="!reverseRetentionList"
+                ></i>
+                <i
+                  class="fas fa-angle-up ml-auto angle"
+                  [ngClass]="{ 'angle-hided': !sort }"
+                  *ngIf="reverseRetentionList"
+                ></i>
+              </div>
+            </th>
+            <th [ngStyle]="{ width: 25 + '%' }">{{ 'ENABLED' | translate }}</th>
+            <th></th>
+          </tr>
+        </thead>
+      </table>
+
+      <div class="table-scroll-container">
+        <table class="table table-hover">
+          <tbody class="stripped">
+            <ng-container *ngFor="let item of retentionList; let i = index">
+              <tr
+                *ngIf="!retentionItemSelected?.deleted"
+                (click)="onRowSelect(item)"
+                [ngClass]="{
+                  'info highLightBorderRow': retentionItemSelected !== null && item?.id === retentionItemSelected?.id
+                }"
+              >
+                <td [ngStyle]="{ width: 5 + '%' }">{{ i + 1 }}</td>
+                <td [ngStyle]="{ width: 45 + '%' }">
+                  {{ retentionItemSelected?.id === item.id ? retentionItemSelected.name : item.name }}
+                </td>
+                <td [ngStyle]="{ width: 25 + '%' }">
+                  {{ retentionItemSelected?.id === item.id ? retentionItemSelected.days : item.days }}
+                </td>
+                <td
+                  [ngStyle]="{ width: 25 + '%' }"
+                  *ngIf="retentionItemSelected?.id === item.id ? retentionItemSelected.active : item.active"
+                >
+                  <i class="fas fa-check"></i>
+                </td>
+                <td
+                  [ngStyle]="{ width: 25 + '%' }"
+                  *ngIf="!(retentionItemSelected?.id === item.id ? retentionItemSelected.active : item.active)"
+                >
+                  <i class="fas fa-times"></i>
+                </td>
+              </tr>
+              <tr
+                class="highLightBorder"
+                *ngIf="retentionItemSelected !== null && item?.id === retentionItemSelected?.id"
+              >
+                <td colspan="5" class="noHoverEffect">
+                  <router-outlet> </router-outlet>
+                </td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <app-pagination [paginationInfo]="paginationInfo" (onChange)="onPageChange($event)"></app-pagination>
+        </div>
+        <div class="col-sm-6">
+          <app-page-size-picker
+            class="pull-right"
+            [paginationInfo]="paginationInfo"
+            [options]="[5, 10, 25, 50, 75, 100]"
+            (onChange)="onPageSizeSelect($event)"
+          >
+          </app-page-size-picker>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6"></div>
+        <div class="col-6"></div>
+      </div>
+    </div>
+  </div>
+</div>

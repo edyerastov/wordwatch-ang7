@@ -1,0 +1,30 @@
+<div [formGroup]="group">
+  <ng-select
+    [items]="userListBuffer"
+    [virtualScroll]="true"
+    [hideSelected]="true"
+    placeholder="Users"
+    bindLabel="fullName"
+    [searchable]="false"
+    [loading]="loading"
+    (focus)="onUserSelect($event)"
+    (change)="onUserSelect($event)"
+    (clear)="onUserClear($event)"
+    (scrollToEnd)="onScrollToEnd()"
+    [formControlName]="'user'"
+  >
+    <ng-template ng-option-tmp let-item="item">
+      {{ item.fullName }} <br />
+      <small>{{ item.userName }}</small>
+    </ng-template>
+    <ng-template *ngIf="userListBuffer !== null" ng-header-tmp>
+      <input
+        class="search-input"
+        type="text"
+        [formControlName]="'userSearch'"
+        [(ngModel)]="searchStr"
+        (ngModelChange)="onInputSearch.next($event)"
+      />
+    </ng-template>
+  </ng-select>
+</div>

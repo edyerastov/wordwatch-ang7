@@ -1,0 +1,95 @@
+<div>
+  <h2 translate>EDIT</h2>
+  <form novalidate class="form-horizontal css-form" role="form" name="form" [formGroup]="roleEditForm">
+    <div class="form-group row">
+      <label for="name" class="col-sm-2 col-form-label" translate>ROLE_NAME</label>
+
+      <div class="col-sm-10">
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          name="name"
+          placeholder="{{ 'ROLE_NAME' | translate }}"
+          ngMaxlength="32"
+          [(ngModel)]="roleDetails.name"
+          formControlName="roleName"
+          (change)="onChangeName()"
+          required
+        />
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label" translate>ROLE_PERMISSIONS</label>
+      <div class="col-sm-10">
+        <!--        <app-permission-picker-->
+        <!--          [permissions]="secutiryService.licenseDetails?.permissions"-->
+        <!--          [selected]="roleDetails.permissions"-->
+        <!--          (onChange)="roleDetails.permissions = $event"-->
+        <!--          [group]="roleEditForm"-->
+        <!--        >-->
+        <!--        </app-permission-picker>-->
+        <ng-select
+          [items]="secutiryService.licenseDetails?.permissions"
+          placeholder="Permissions"
+          [searchable]="true"
+          [(ngModel)]="roleDetails.permissions"
+          [multiple]="true"
+          (change)="onPermissionChange()"
+          formControlName="permissions"
+        >
+        </ng-select>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label" translate>SEARCH_PROFILE</label>
+      <div class="col-sm-10">
+        <app-search-profile-picker
+          id="profile-picker"
+          [selected]="roleDetails?.searchProfile?.type"
+          (onChange)="roleDetails.searchProfile.type = $event"
+          (onClear)="roleDetails.searchProfile.type = $event"
+          [group]="roleEditForm"
+        >
+        </app-search-profile-picker>
+      </div>
+    </div>
+    <div class="form-group row" *ngIf="showProfileSelect">
+      <div class="col-sm-12">
+        <app-search-profile-select
+          [group]="roleEditForm"
+          [deviceIdList]="deviceIdList"
+          [userIdList]="userIdList"
+          [groupIdList]="groupIdList"
+          [devices]="roleDetails.searchProfile.devices"
+          [users]="roleDetails.searchProfile.users"
+          [groups]="roleDetails.searchProfile.groups"
+        >
+        </app-search-profile-select>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="offset-md-2 col-sm-10">
+        <button
+          type="submit"
+          class="btn btn-success"
+          [disabled]="roleEditForm.invalid || showCancelConfirmation || formValid"
+          translate
+          (click)="onRoleUpdate()"
+        >
+          {{ 'SAVE' | translate }}
+        </button>
+        <button class="btn btn-success" (click)="onCancel()" [disabled]="showCancelConfirmation">
+          {{ 'CANCEL' | translate }}
+        </button>
+      </div>
+    </div>
+    <div class="form-group row" [hidden]="!showCancelConfirmation">
+      <label class="col-sm-6 col-form-label" translate>CANCEL_SURE</label>
+      <div class="col-sm-6">
+        <button (click)="back()" class="btn btn-success" translate>YES</button>
+        <button (click)="showCancelConfirmation = false" class="btn btn-default" translate>NO</button>
+      </div>
+    </div>
+  </form>
+</div>

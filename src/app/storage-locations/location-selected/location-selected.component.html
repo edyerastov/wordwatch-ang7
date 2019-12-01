@@ -1,0 +1,8 @@
+<div>
+  <div class="text-center">
+    <div *ngIf="licationType === 'ntfsFileShare' || licationType === 'azure'">
+      <a class="btn btn-secondary" (click)="onEdit()" translate skipLocationChange>EDIT</a>
+    </div>
+  </div>
+  <router-outlet></router-outlet>
+</div>

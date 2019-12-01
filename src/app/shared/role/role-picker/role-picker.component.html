@@ -1,0 +1,26 @@
+<div [formGroup]="group">
+  <ng-select
+    [items]="roleListBuffer"
+    [virtualScroll]="true"
+    [hideSelected]="true"
+    placeholder="Role"
+    bindLabel="label"
+    [searchable]="false"
+    [loading]="loading"
+    (focus)="onItemSelect($event)"
+    (change)="onItemSelect($event)"
+    (clear)="onItemClear($event)"
+    (scrollToEnd)="onScrollToEnd()"
+    [formControlName]="'roles'"
+  >
+    <ng-template *ngIf="options?.searchable" ng-header-tmp>
+      <input
+        class="search-input"
+        type="text"
+        [formControlName]="'rolesSearch'"
+        [(ngModel)]="searchStr"
+        (ngModelChange)="onInputSearch.next($event)"
+      />
+    </ng-template>
+  </ng-select>
+</div>

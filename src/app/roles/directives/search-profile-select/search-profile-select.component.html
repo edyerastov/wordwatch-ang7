@@ -1,0 +1,124 @@
+<ngb-tabset>
+  <ngb-tab title="Devices">
+    <ng-template ngbTabContent>
+      <h3 class="text-center mt-3" translate>DEVICES</h3>
+      <div class="row">
+        <label *ngIf="!readonly" class="col-sm-2 control-label" translate>AVAILABLE_DEVICES</label>
+        <div class="col-sm-10" *ngIf="!readonly">
+          <app-device-picker (onChangeDevices)="onAddDevice($event)" [group]="roleNewPicker"></app-device-picker>
+        </div>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th translate>DEVICES</th>
+              <th translate>USER</th>
+              <th translate class="text-center">ALLOCATED</th>
+              <th translate class="text-center" *ngIf="!readonly">REMOVE</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngIf="devices.length === 0">
+              <tr>
+                <td colspan="4" class="text-center">There are no elements to display.</td>
+              </tr>
+            </ng-container>
+            <ng-container *ngFor="let device of devices; let i = index">
+              <tr>
+                <td>{{ device.name }}</td>
+                <td>{{ device.userFullName }}</td>
+                <td class="text-center">
+                  <i class="fas fa-check" *ngIf="device.isAllocated"></i>
+                  <i class="fas fa-times" *ngIf="!device.isAllocated"></i>
+                </td>
+                <td class="text-center">
+                  <a [routerLink]="" (click)="deleteDevice(i)"><i class="fas fa-times"></i></a>
+                </td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+      </div>
+    </ng-template>
+  </ngb-tab>
+  <ngb-tab title="Users">
+    <ng-template ngbTabContent>
+      <h3 class="text-center mt-3" translate>USERS</h3>
+      <div class="row">
+        <label *ngIf="!readonly" class="col-sm-2 control-label" translate>AVAILABLE_USERS</label>
+        <div class="col-sm-10" *ngIf="!readonly">
+          <app-user-picker (onChangeUsers)="onAddUser($event)" [group]="roleNewPicker"></app-user-picker>
+        </div>
+        <table class="table mt-3 table-hover">
+          <thead>
+            <tr>
+              <th translate>USERNAME</th>
+              <th translate>FULLNAME</th>
+              <th translate>EMAIL</th>
+              <th translate>ROLE</th>
+              <th translate class="text-center">ENABLED</th>
+              <th translate class="text-center">REMOVE</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngIf="users.length === 0">
+              <tr>
+                <td colspan="6" class="text-center">There are no elements to display.</td>
+              </tr>
+            </ng-container>
+            <ng-container *ngFor="let user of users; let i = index">
+              <tr>
+                <td>{{ user.userName }}</td>
+                <td>{{ user.fullName }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.role }}</td>
+                <td class="text-center">
+                  <i class="fas fa-check" *ngIf="user.active"></i>
+                  <i class="fas fa-times" *ngIf="!user.active"></i>
+                </td>
+                <td class="text-center">
+                  <a [routerLink]="" (click)="deleteUser(i)"><i class="fas fa-times"></i></a>
+                </td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+      </div>
+    </ng-template>
+  </ngb-tab>
+  <ngb-tab title="Groups">
+    <ng-template ngbTabContent>
+      <h3 class="text-center mt-3" translate>GROUPS</h3>
+      <div class="row">
+        <label *ngIf="!readonly" class="col-sm-2 control-label" translate>AVAILABLE_GROUPS</label>
+        <div class="col-sm-10" *ngIf="!readonly">
+          <app-group-picker (onChangeGroups)="onAddGroup($event)" [group]="roleNewPicker"></app-group-picker>
+        </div>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th translate>GROUPS</th>
+              <th translate>GROUP_TYPE</th>
+              <th translate class="text-center" *ngIf="!readonly">REMOVE</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngIf="groups.length === 0">
+              <tr>
+                <td colspan="3" class="text-center">There are no elements to display.</td>
+              </tr>
+            </ng-container>
+            <ng-container *ngFor="let group of groups; let i = index">
+              <tr>
+                <td>{{ group.name }}</td>
+                <td>{{ group.type }}</td>
+                <td class="text-center">
+                  <a [routerLink]="" (click)="deleteGroup(i)"><i class="fas fa-times"></i></a>
+                </td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+      </div>
+    </ng-template>
+  </ngb-tab>
+</ngb-tabset>

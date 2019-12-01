@@ -1,0 +1,11 @@
+<div>
+  <div class="text-center">
+    <div>
+      <a class="btn btn-secondary" (click)="onSelect('edit')" translate skipLocationChange>EDIT</a>
+      <a class="btn btn-secondary" (click)="onSelect('active')" translate skipLocationChange>Enable/Disable</a>
+      <a class="btn btn-secondary" (click)="onSelect('role')" translate skipLocationChange>ROLE</a>
+      <a class="btn btn-secondary" (click)="onSelect('devices')" translate skipLocationChange>DEVICES</a>
+    </div>
+  </div>
+  <router-outlet></router-outlet>
+</div>
