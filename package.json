@@ -16,7 +16,8 @@
     "env": "ngx-scripts env npm_package_version",
     "prettier": "prettier --write \"./{src,e2e}/**/*.{ts,js,html,scss}\"",
     "prettier:check": "prettier --list-different \"./{src,e2e}/**/*.{ts,js,html,scss}\"",
-    "postinstall": "ng build --aot --prod",
+    "postinstall": "ng build --aot -prod",
+    "heroku-postbuild": "ng build --prod",
     "generate": "ng generate"
   },
   "dependencies": {
@@ -49,7 +50,8 @@
     "rxjs": "^6.5.3",
     "rxjs-compat": "^6.5.3",
     "select2": "^4.0.12",
-    "zone.js": "^0.9.1"
+    "zone.js": "^0.9.1",
+    "typescript": "~3.2.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.13.9",
