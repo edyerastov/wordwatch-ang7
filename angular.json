@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "wordwatch": {
+    "wordwatch-ang7": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -17,8 +17,6 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "browserTarget": "wordwatch-ang7:build",
-            "proxyConfig": "src/proxy.conf.js",
             "outputPath": "dist/wordwatch-ang7",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -81,11 +79,12 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "wordwatch:build"
+            "browserTarget": "wordwatch-ang7:build",
+            "proxyConfig": "src/proxy.conf.js"
           },
           "configurations": {
             "production": {
-              "browserTarget": "wordwatch:build:production"
+              "browserTarget": "wordwatch-ang7:build:production"
             },
             "ci": {
               "progress": false
@@ -95,7 +94,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "wordwatch:build"
+            "browserTarget": "wordwatch-ang7:build"
           }
         },
         "test": {
@@ -131,7 +130,7 @@
         }
       }
     },
-    "wordwatch-e2e": {
+    "wordwatch-ang7-e2e": {
       "root": "e2e",
       "projectType": "application",
       "architect": {
@@ -139,7 +138,7 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "wordwatch:serve"
+            "devServerTarget": "wordwatch-ang7:serve"
           }
         },
         "lint": {
@@ -152,5 +151,5 @@
       }
     }
   },
-  "defaultProject": "wordwatch"
+  "defaultProject": "wordwatch-ang7"
 }
