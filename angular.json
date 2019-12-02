@@ -17,6 +17,8 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "browserTarget": "wordwatch-ang7:build",
+            "proxyConfig": "src/proxy.conf.js",
             "outputPath": "dist/wordwatch-ang7",
             "index": "src/index.html",
             "main": "src/main.ts",
