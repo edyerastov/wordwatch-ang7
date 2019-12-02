@@ -26,8 +26,7 @@ export class AuthenticationService {
   login(context: LoginContext): Observable<LoginContext> {
     const httpOptions = {
       headers: new HttpHeaders({ content: 'application/json', 'content-type': 'application/json;charset=UTF-8' }),
-      withCredentials: true,
-      responseType: 'text' as 'json'
+      withCredentials: true
     };
     const data = {
       username: context.username,
