@@ -247,8 +247,9 @@ export class UserListComponent implements OnInit, OnDestroy {
       .getUsersByPrm(obj)
       .pipe(
         tap((data: any) => {
-          this.userList = data['_embedded']['collection'];
-          console.log(data);
+          const users = JSON.parse(data);
+          this.userList = users['_embedded']['collection'];
+          console.log(users);
           this.paginationInfo = (({ pageNumber, pageSize, totalPages, totalResults }) => ({
             pageNumber,
             pageSize,

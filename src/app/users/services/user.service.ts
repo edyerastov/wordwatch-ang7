@@ -9,12 +9,8 @@ export class UserService {
 
   constructor(private httpClient: HttpClient) {}
 
-  getUsers() {
-    return this.httpClient.get(`/users?pageSize=${PAGE_SIZE.mainList}`);
-  }
-
   newUser(data: any) {
-    return this.httpClient.post('/users', data);
+    return this.httpClient.post('/users', data, { responseType: 'text' });
   }
 
   getUsersByPrm(obj: any) {
@@ -24,7 +20,7 @@ export class UserService {
       let value = obj[key];
       url = url + `&${key}=${value}`;
     }
-    return this.httpClient.get(url);
+    return this.httpClient.get(url, { responseType: 'text' });
   }
 
   // To get user details based on id
@@ -34,29 +30,29 @@ export class UserService {
 
   // To get user devices based on id
   getUserDevices(id: string) {
-    return this.httpClient.get('/users/' + id + '/devices');
+    return this.httpClient.get('/users/' + id + '/devices', { responseType: 'text' });
   }
 
   // To update user details
   updateUserDetails(id: string, data: any) {
-    return this.httpClient.put('/users/' + id, data);
+    return this.httpClient.put('/users/' + id, data, { responseType: 'text' });
   }
 
   activeUserDetails(id: string, data: string) {
-    return this.httpClient.put('/users/' + id + '/' + data, {});
+    return this.httpClient.put('/users/' + id + '/' + data, {}, { responseType: 'text' });
   }
 
   updateUserRole(userId: string, roleId: string) {
-    return this.httpClient.put('/users/' + userId + '/role/' + roleId, {});
+    return this.httpClient.put('/users/' + userId + '/role/' + roleId, {}, { responseType: 'text' });
   }
 
   // To delete device by id
   deleteUserDevice(id: string) {
-    return this.httpClient.delete('/devices/' + id + '/user');
+    return this.httpClient.delete('/devices/' + id + '/user', { responseType: 'text' });
   }
 
   putUserDevice(deviceId: string, userId: string) {
-    return this.httpClient.put('/devices/' + deviceId + '/user/' + userId, {});
+    return this.httpClient.put('/devices/' + deviceId + '/user/' + userId, {}, { responseType: 'text' });
   }
 
   sendUpdate(state: any) {
