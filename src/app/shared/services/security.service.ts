@@ -10,7 +10,7 @@ export class SecutiryService {
   // To get locense details roles
   getLicenseDetails() {
     const promise = this.httpClient
-      .get('/licensing')
+      .get('/licensing', { responseType: 'text' })
       .toPromise()
       .then(response => {
         this.licenseDetails = response;

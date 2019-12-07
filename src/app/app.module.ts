@@ -29,7 +29,7 @@ import { RetentionRulesModule } from '@app/retention-rules/retention-rules.modul
 export function security_app(secutiryService: SecutiryService) {
   return () => secutiryService.getLicenseDetails();
 }
-
+// 7.2.15
 @NgModule({
   imports: [
     BrowserModule,
