@@ -1,0 +1,12 @@
+{
+  "hosting": {
+    "public": "dist/wordwatch-ang7",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}

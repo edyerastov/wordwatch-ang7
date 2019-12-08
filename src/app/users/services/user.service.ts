@@ -20,7 +20,8 @@ export class UserService {
       let value = obj[key];
       url = url + `&${key}=${value}`;
     }
-    return this.httpClient.get(url, { responseType: 'text' });
+    console.log(url);
+    return this.httpClient.get(url, { responseType: 'json' });
   }
 
   // To get user details based on id

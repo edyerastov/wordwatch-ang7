@@ -1,5 +1,16 @@
 const express = require('express');
 const path = require('path');
+const HttpsProxyAgent = require('https-proxy-agent');
+
+const proxyConfig = [
+  {
+    context: '/api',
+    pathRewrite: { '^/': '' },
+    target: 'http://10.0.0.4',
+    changeOrigin: true,
+    secure: false
+  }
+];
 
 const app = express();
 
@@ -12,3 +23,24 @@ app.get('/*', function(req, res) {
 
 // Start the app by listening on the default Heroku port
 app.listen(process.env.PORT || 8080);
+
+function setupForCorporateProxy(proxyConfig) {
+  if (!Array.isArray(proxyConfig)) {
+    proxyConfig = [proxyConfig];
+  }
+
+  const proxyServer = process.env.http_proxy || process.env.HTTP_PROXY;
+  let agent = null;
+
+  if (proxyServer) {
+    console.log(`Using corporate proxy server: ${proxyServer}`);
+    agent = new HttpsProxyAgent(proxyServer);
+    proxyConfig.forEach(entry => {
+      entry.agent = agent;
+    });
+  }
+
+  return proxyConfig;
+}
+
+module.exports = setupForCorporateProxy(proxyConfig);

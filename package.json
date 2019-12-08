@@ -4,9 +4,9 @@
   "private": true,
   "scripts": {
     "ng": "ng",
-    "build": "npm run env -s && ng build --prod",
+    "build": "npm run env -s && ng build --prod --base-href https://wordwatch-ang7.firebaseapp.com/",
     "start": "node server.js",
-    "serve:sw": "npm run build -s && npx http-server ./dist -p 4200",
+    "serve:sw": "npm run build -s && npx http-server ./dist/worwatch-ang7 -p 4200",
     "lint": "ng lint && stylelint \"src/**/*.scss\" --syntax scss && htmlhint \"src\" --config .htmlhintrc",
     "test": "npm run env -s && ng test",
     "test:ci": "npm run env -s && npm run lint -s && ng test --code-coverage --watch=false",
@@ -54,7 +54,7 @@
     "zone.js": "^0.9.1"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^0.10.7",
+    "@angular-devkit/build-angular": "^0.13.9",
     "@angular/cli": "^7.3.9",
     "@angular/compiler-cli": "^7.2.15",
     "@angular/language-service": "^7.2.15",
