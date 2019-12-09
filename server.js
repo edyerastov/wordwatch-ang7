@@ -6,7 +6,11 @@ const app = express();
 // Serve only the static files form the dist directory
 app.use(express.static(__dirname + '/dist/wordwatch-ang7'));
 
-app.get('*', function(req, res) {
+app.post('/api/*', (req, res) => {
+  return res.json({ status: 'ok' });
+});
+
+app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname + '/dist/wordwatch-ang7/index.html'));
 });
 
