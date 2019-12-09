@@ -66,6 +66,7 @@
     "@types/jasminewd2": "^2.0.8",
     "@types/node": "^8.10.59",
     "codelyzer": "^5.2.0",
+    "dotenv": "^8.2.0",
     "enhanced-resolve": "^3.3.0",
     "file-saver": "^2.0.2",
     "hads": "^1.7.3",
