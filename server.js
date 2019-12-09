@@ -8,10 +8,8 @@ app.use(app.router);
 // Serve only the static files form the dist directory
 app.use(express.static(__dirname + '/dist/wordwatch-ang7'));
 
-app.get('/*', function(req, res, next) {
-  res.sendFile(path.join(__dirname + '/dist/wordwatch-ang7/index.html'));
-  res.setHeader('Last-Modified', new Date().toUTCString());
-  next();
+app.get('/*', function(req, res) {
+  res.sendFile(path.join(__dirname, 'dist/wordwatch-ang7', 'index.html'));
 });
 
 // Start the app by listening on the default Heroku port
