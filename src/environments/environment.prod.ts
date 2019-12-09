@@ -10,7 +10,7 @@
 export const environment = {
   production: true,
   version: '1.0.0',
-  serverUrl: 'https://wordwatch-ang7.herokuapp.com/api',
+  serverUrl: 'http://10.0.0.4/api',
   defaultLanguage: 'en-US',
   supportedLanguages: ['en-US', 'fr-FR']
 };
