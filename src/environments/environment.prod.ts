@@ -11,6 +11,7 @@ export const environment = {
   production: true,
   version: '1.0.0',
   serverUrl: '/api',
+  apiUrl: 'http://10.0.0.4',
   defaultLanguage: 'en-US',
   supportedLanguages: ['en-US', 'fr-FR']
 };
