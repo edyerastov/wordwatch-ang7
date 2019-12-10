@@ -10,7 +10,7 @@ app.use(express.static(__dirname + '/dist/wordwatch-ang7'));
 app.use(
   '/api',
   proxy({
-    target: 'http://10.0.0.4',
+    target: 'http://10.0.0.4:3000',
     changeOrigin: true,
     pathRewrite: { '^/': '' }
   })
