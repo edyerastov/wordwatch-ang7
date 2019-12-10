@@ -22,4 +22,4 @@ app.use(cors({ origin: 'https://wordwatch-ang7.herokuapp.com/' }));
 app.use(apiProxy);
 
 // Start the app by listening on the default Heroku port
-app.listen(3000);
+app.listen(process.env.PORT || 8080);
