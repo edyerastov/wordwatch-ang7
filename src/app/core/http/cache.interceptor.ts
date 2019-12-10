@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Observable, Subscriber } from 'rxjs';
 
-import { HttpCacheService } from './http-cache.service';
+import { HttpCacheService } from '@app/core';
 
 /**
  * Caches HTTP requests.

@@ -1,7 +1,6 @@
 const express = require('express');
 const path = require('path');
 const proxy = require('http-proxy-middleware');
-const cors = require('cors');
 
 const apiProxy = proxy('/api', {
   target: 'http://10.0.0.4/',
@@ -15,25 +14,6 @@ const app = express();
 app.use(express.static(__dirname + '/dist/wordwatch-ang7'));
 app.get('/*', function(req, res) {
   res.sendFile(path.join(__dirname + '/dist/wordwatch-ang7/index.html'));
-});
-
-// Add headers
-app.use(function(req, res, next) {
-  // Website you wish to allow to connect
-  res.setHeader('Access-Control-Allow-Origin', 'https://wordwatch-ang7.herokuapp.com/');
-
-  // Request methods you wish to allow
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-
-  // Request headers you wish to allow
-  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-
-  // Set to true if you need the website to include cookies in the requests sent
-  // to the API (e.g. in case you use sessions)
-  res.setHeader('Access-Control-Allow-Credentials', true);
-
-  // Pass to next layer of middleware
-  next();
 });
 
 app.use(apiProxy);
