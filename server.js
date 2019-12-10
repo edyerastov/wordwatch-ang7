@@ -10,7 +10,7 @@ app.use(express.static(__dirname + '/dist/wordwatch-ang7'));
 app.use(
   '/api',
   proxy({
-    target: '52.164.223.244',
+    target: 'https://wordwatch-ang7.herokuapp.com',
     changeOrigin: true,
     pathRewrite: { '^/': '' }
   })
