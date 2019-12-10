@@ -23,7 +23,7 @@ app.use(express.static(__dirname + '/dist/wordwatch-ang7'));
 //   pathRewrite: { '^/': '' }
 // }));
 
-function setupForCorporateProxy(proxyConfig) {
+app.use(proxyConfig => {
   if (!Array.isArray(proxyConfig)) {
     proxyConfig = [proxyConfig];
   }
@@ -40,13 +40,11 @@ function setupForCorporateProxy(proxyConfig) {
   }
 
   return proxyConfig;
-}
+});
 
 app.get('/*', function(req, res) {
   res.sendFile(path.join(__dirname + '/dist/wordwatch-ang7/index.html'));
 });
-
-module.exports = setupForCorporateProxy(proxyConfig);
 
 // Start the app by listening on the default Heroku port
 app.listen(process.env.PORT || 8080);
