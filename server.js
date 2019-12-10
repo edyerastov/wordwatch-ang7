@@ -10,7 +10,7 @@ app.use(express.static(__dirname + '/dist/wordwatch-ang7'));
 app.use(
   '/api',
   proxy({
-    target: 'https://wordwatch-ang7.herokuapp.com',
+    target: '10.0.0.4',
     changeOrigin: true,
     pathRewrite: { '^/': '' }
   })
@@ -22,4 +22,4 @@ app.get('/*', function(req, res) {
 });
 
 // Start the app by listening on the default Heroku port
-app.listen(process.env.PORT || 5000);
+app.listen(80);
