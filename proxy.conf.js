@@ -12,7 +12,7 @@ const proxyConfig = [
   {
     context: '/api',
     pathRewrite: { '^/': '' },
-    target: 'http://10.0.0.4',
+    target: '52.164.223.244',
     changeOrigin: true,
     secure: false
   }
