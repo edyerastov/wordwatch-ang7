@@ -3,7 +3,7 @@ const path = require('path');
 const proxy = require('http-proxy-middleware');
 
 const apiProxy = proxy('/api', {
-  target: 'https://wordwatch-ang7.herokuapp.com',
+  target: 'http://52.164.223.244',
   changeOrigin: true,
   pathRewrite: { '^/': '' }
 });
