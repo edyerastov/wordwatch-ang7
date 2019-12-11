@@ -3,8 +3,9 @@ const path = require('path');
 const proxy = require('http-proxy-middleware');
 
 const apiProxy = proxy('/api', {
-  target: 'http://52.164.223.244',
+  target: 'http://10.0.0.4',
   changeOrigin: true,
+  secure: false,
   pathRewrite: { '^/': '' }
 });
 
