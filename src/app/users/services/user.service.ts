@@ -7,9 +7,12 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class UserService {
   public changeState = new BehaviorSubject({ state: false });
   private httpOptions = {
-    headers: new HttpHeaders({ content: 'application/json', 'content-type': 'application/json;charset=UTF-8' }),
-    responseType: 'text' as 'json',
-    referrer: 'https://wordwatch-ang7.herokuapp.com'
+    headers: new HttpHeaders({
+      content: 'application/json',
+      'content-type': 'application/json;charset=UTF-8',
+      referer: 'https://wordwatch-ang7.herokuapp.com'
+    }),
+    responseType: 'text' as 'json'
   };
 
   constructor(private httpClient: HttpClient) {}
