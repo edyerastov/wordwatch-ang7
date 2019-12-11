@@ -16,7 +16,7 @@ app.get('/*', function(req, res) {
   res.sendFile(path.join(__dirname + '/dist/wordwatch-ang7/index.html'));
 });
 
-app.use(apiProxy);
+// app.use(apiProxy);
 
 // Start the app by listening on the default Heroku port
 app.listen(process.env.PORT || 8080);
