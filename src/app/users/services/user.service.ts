@@ -1,11 +1,15 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { PAGE_SIZE } from '@app/shared/constant/constant';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable()
 export class UserService {
   public changeState = new BehaviorSubject({ state: false });
+  private httpOptions = {
+    headers: new HttpHeaders({ content: 'application/json', 'content-type': 'application/json;charset=UTF-8' }),
+    responseType: 'text' as 'json'
+  };
 
   constructor(private httpClient: HttpClient) {}
 
@@ -21,7 +25,7 @@ export class UserService {
       url = url + `&${key}=${value}`;
     }
     console.log(url);
-    return this.httpClient.get(url, { responseType: 'text' });
+    return this.httpClient.get(url, this.httpOptions);
   }
 
   // To get user details based on id
