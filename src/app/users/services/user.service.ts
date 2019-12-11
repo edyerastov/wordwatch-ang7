@@ -8,7 +8,8 @@ export class UserService {
   public changeState = new BehaviorSubject({ state: false });
   private httpOptions = {
     headers: new HttpHeaders({ content: 'application/json', 'content-type': 'application/json;charset=UTF-8' }),
-    responseType: 'text' as 'json'
+    responseType: 'text' as 'json',
+    referrer: 'https://wordwatch-ang7.herokuapp.com'
   };
 
   constructor(private httpClient: HttpClient) {}
