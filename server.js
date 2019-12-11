@@ -13,7 +13,7 @@ const app = express();
 // Serve only the static files form the dist directory
 app.use(express.static(__dirname + '/dist/wordwatch-ang7'));
 app.get('/*', function(req, res) {
-  res.sendFile(__dirname + '/index.html');
+  res.sendFile(path.join(__dirname + '/dist/wordwatch-ang7/index.html'));
 });
 
 app.use(apiProxy);
