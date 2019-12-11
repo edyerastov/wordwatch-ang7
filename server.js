@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const proxy = require('http-proxy-middleware');
 
-const apiProxy = proxy('/api/*', {
+const apiProxy = proxy('/api', {
   target: 'http://52.164.223.244',
   changeOrigin: true,
   pathRewrite: { '^/': '' }
