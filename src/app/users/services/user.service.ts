@@ -21,7 +21,7 @@ export class UserService {
       url = url + `&${key}=${value}`;
     }
     console.log(url);
-    return this.httpClient.get(url, { responseType: 'json' });
+    return this.httpClient.get(url, { responseType: 'text' });
   }
 
   // To get user details based on id
