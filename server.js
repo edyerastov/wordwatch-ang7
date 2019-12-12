@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const browserSync = require('browser-sync').create();
 const proxy = require('http-proxy-middleware');
 
 const apiProxy = proxy('/api', {
@@ -17,6 +18,15 @@ app.get('/*', function(req, res) {
 });
 
 app.use(apiProxy);
+
+browserSync.init({
+  server: {
+    baseDir: './',
+    port: 8080,
+    middleware: [apiProxy]
+  },
+  startPath: '/api'
+});
 
 // Start the app by listening on the default Heroku port
 app.listen(process.env.PORT || 8080);
