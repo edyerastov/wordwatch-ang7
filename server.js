@@ -11,21 +11,12 @@ const apiProxy = proxy('/api', {
 
 const app = express();
 
+app.use(apiProxy);
+
 // Serve only the static files form the dist directory
 app.use(express.static(__dirname + '/dist/wordwatch-ang7'));
 app.get('/*', function(req, res) {
   res.sendFile(path.join(__dirname + '/dist/wordwatch-ang7/index.html'));
-});
-
-app.use(apiProxy);
-
-browserSync.init({
-  server: {
-    baseDir: './',
-    port: 8080,
-    middleware: [apiProxy]
-  },
-  startPath: '/api'
 });
 
 // Start the app by listening on the default Heroku port
