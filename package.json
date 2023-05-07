@@ -49,7 +49,7 @@
     "heroku-proxy": "^2.1.1",
     "http-proxy": "^1.18.0",
     "http-proxy-middleware": "^0.20.0",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "ng-click-outside": "^4.0.0",
     "node-sass": "^4.13.0",
     "path": "^0.12.7",
