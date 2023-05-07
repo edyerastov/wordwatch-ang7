@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "@angular/animations": "^7.2.15",
-    "@angular/cli": "^7.3.9",
+    "@angular/cli": "^16.0.0",
     "@angular/common": "^7.2.15",
     "@angular/compiler": "^7.2.15",
     "@angular/compiler-cli": "^7.2.15",
@@ -62,7 +62,7 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.13.9",
-    "@angular/cli": "^7.3.9",
+    "@angular/cli": "^16.0.0",
     "@angular/compiler-cli": "^7.2.15",
     "@angular/language-service": "^7.2.15",
     "@biesbjerg/ngx-translate-extract": "^2.3.4",
